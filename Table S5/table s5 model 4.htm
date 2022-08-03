@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<style>
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+a:link
+{
+    color: black;
+    text-decoration: none;
+}
+a[name]:hover
+{
+    text-decoration: none;
+}
+a:hover
+{
+    color: blue;
+    text-decoration: underline;
+}
+a:visited
+{
+    color: black;
+    text-decoration: none;
+}
+.heading
+{
+    color: black;
+    font-weight: bold;
+    font-size: 110%;
+}
+.heading:hover
+{
+    color: black;
+    font-weight: bold;
+    font-size: 110%;
+    text-decoration: none;
+}
+</style>
+
+<body style="font-family:'Courier New'; font-size:14px;">
+<p class="heading">
+Mplus VERSION 8.8<br />
+MUTHEN & MUTHEN<br />
+06/08/2022   6:13 PM<br />
+</p>
+
+<p class='heading'>OUTPUT SECTIONS</p>
+
+<ul>
+     <li><a href='#input'>Input Instructions</a></li>
+     <li><a href='#inputmessages'>Input Warnings And Errors</a></li>
+     <li><a href='#summary_analysis'>Summary Of Analysis</a></li>
+     <li><a href='#summary_data'>Summary Of Data</a></li>
+     <li><a href='#samplestats'>Sample Statistics</a></li>
+     <li><a href='#univariatess'>Univariate Sample Statistics</a></li>
+     <li><a href='#modelmessages'>Model Warnings And Errors</a></li>
+     <li><a href='#model_fit'>Model Fit Information</a></li>
+     <li><a href='#model_results'>Model Results</a></li>
+     <li><a href='#ci_results'>Confidence Intervals Of Model Results</a></li>
+</ul>
+<pre>
+
+<a name='input' class='heading'>INPUT INSTRUCTIONS</a>
+
+  Title:
+  Table S5 Model 4;
+  Data:
+    File is HBSC_mplus_07062022.dat ;
+    listwise = ON;
+  Variable:
+    Names are
+       seqno_int age physact60 countries_small countries_small_noSK GNI_std
+       UNIDIFF UNIDIFF_ct UNIDIFF_ct_rev GINI weekly_smoking gender softsweets_sum
+       fruitveg_sum breakfast_days VPA FAS_ridit;
+    Missing are all (-9999) ;
+
+  Usevariables are countries_small softsweets_sum gender age FAS_ridit
+  UNIDIFF_ct_rev GNI_std GINI;
+
+  USEOBSERVATIONS ARE (FAS_ridit NE -9999) AND (age NE -9999) AND (gender NE -9999);
+
+  CLUSTER is countries_small;
+
+  WITHIN ARE gender age FAS_ridit;
+
+  BETWEEN ARE UNIDIFF_ct_rev GNI_std GINI;
+
+  DEFINE:
+  center gender age FAS_ridit (groupmean);
+  center UNIDIFF_ct_rev GNI_std GINI (grandmean);
+
+  ANALYSIS:
+    TYPE IS TWOLEVEL RANDOM;
+    ESTIMATOR IS MLR;
+    PROCESS = 3;
+
+  MODEL:
+  %within%
+  slopeFAS | softsweets_sum ON FAS_ridit;
+  softsweets_sum ON gender age;
+
+
+  %between%
+  softsweets_sum ON UNIDIFF_ct_rev GINI GNI_std;
+  softsweets_sum WITH slopeFAS;
+
+  slopeFAS ON UNIDIFF_ct_rev GINI GNI_std;
+
+  OUTPUT: sampstat cinterval;
+
+
+<a name='inputmessages' class='heading'></a>
+
+*** WARNING in VARIABLE command
+  Note that only the first 8 characters of variable names are used in the output.
+  Shorten variable names to avoid any confusion.
+   1 WARNING(S) FOUND IN THE INPUT INSTRUCTIONS
+
+
+
+
+Table S5 Model 4;
+
+<a name='summary_analysis' class='heading'>SUMMARY OF ANALYSIS</a>
+
+Number of groups                                                 1
+Number of observations                                      172224
+
+Number of dependent variables                                    1
+Number of independent variables                                  6
+Number of continuous latent variables                            1
+
+Observed dependent variables
+
+  Continuous
+   SOFTSWEETS
+
+Observed independent variables
+   GENDER      AGE         FAS_RIDI    UNIDIFF_    GNI_STD     GINI
+
+Continuous latent variables
+   SLOPEFAS
+
+Variables with special functions
+
+  Cluster variable      COUNTRIE
+
+  Within variables
+   GENDER      AGE         FAS_RIDI
+
+  Between variables
+   UNIDIFF_    GNI_STD     GINI
+
+  Centering (GRANDMEAN)
+   UNIDIFF_    GNI_STD     GINI
+
+  Centering (GROUPMEAN)
+   GENDER      AGE         FAS_RIDI
+
+
+Estimator                                                      MLR
+Information matrix                                        OBSERVED
+Maximum number of iterations                                   100
+Convergence criterion                                    0.100D-05
+Maximum number of EM iterations                                500
+Convergence criteria for the EM algorithm
+  Loglikelihood change                                   0.100D-02
+  Relative loglikelihood change                          0.100D-05
+  Derivative                                             0.100D-03
+Minimum variance                                         0.100D-03
+Maximum number of steepest descent iterations                   20
+Maximum number of iterations for H1                           2000
+Convergence criterion for H1                             0.100D-03
+Optimization algorithm                                         EMA
+
+Input data file(s)
+  HBSC_mplus_07062022.dat
+Input data format  FREE
+
+
+<a name='summary_data' class='heading'>SUMMARY OF DATA</a>
+
+     Number of clusters                         32
+
+     Average cluster size     5382.000
+
+     Estimated Intraclass Correlations for the Y Variables
+
+                Intraclass              Intraclass
+     Variable  Correlation   Variable  Correlation
+
+     SOFTSWEE     0.063
+
+
+
+<a name='samplestats' class='heading'>SAMPLE STATISTICS</a>
+
+NOTE:  The sample statistics for within and between refer to the
+       maximum-likelihood estimated within and between covariance
+       matrices, respectively.
+
+
+     ESTIMATED SAMPLE STATISTICS FOR WITHIN
+
+
+           Means
+              SOFTSWEE      GENDER        AGE           FAS_RIDI      UNIDIFF_
+              ________      ________      ________      ________      ________
+                0.000         0.000         0.000         0.000         0.000
+
+
+           Means
+              GNI_STD       GINI
+              ________      ________
+                0.000         0.000
+
+
+           Covariances
+              SOFTSWEE      GENDER        AGE           FAS_RIDI      UNIDIFF_
+              ________      ________      ________      ________      ________
+ SOFTSWEE       7.322
+ GENDER         0.076         0.250
+ AGE            0.315        -0.001         2.621
+ FAS_RIDI      -0.019         0.000        -0.001         0.082
+ UNIDIFF_       0.000         0.000         0.000         0.000         0.000
+ GNI_STD        0.000         0.000         0.000         0.000         0.000
+ GINI           0.000         0.000         0.000         0.000         0.000
+
+
+           Covariances
+              GNI_STD       GINI
+              ________      ________
+ GNI_STD        0.000
+ GINI           0.000         0.000
+
+
+           Correlations
+              SOFTSWEE      GENDER        AGE           FAS_RIDI      UNIDIFF_
+              ________      ________      ________      ________      ________
+ SOFTSWEE       1.000
+ GENDER         0.056         1.000
+ AGE            0.072        -0.002         1.000
+ FAS_RIDI      -0.024         0.001        -0.002         1.000
+ UNIDIFF_       0.000         0.000         0.000         0.000         0.000
+ GNI_STD        0.000         0.000         0.000         0.000         0.000
+ GINI           0.000         0.000         0.000         0.000         0.000
+
+
+           Correlations
+              GNI_STD       GINI
+              ________      ________
+ GNI_STD        0.000
+ GINI           0.000         0.000
+
+
+     ESTIMATED SAMPLE STATISTICS FOR BETWEEN
+
+
+           Means
+              SOFTSWEE      GENDER        AGE           FAS_RIDI      UNIDIFF_
+              ________      ________      ________      ________      ________
+                5.494         0.000         0.000         0.000         0.000
+
+
+           Means
+              GNI_STD       GINI
+              ________      ________
+                0.000         0.000
+
+
+           Covariances
+              SOFTSWEE      GENDER        AGE           FAS_RIDI      UNIDIFF_
+              ________      ________      ________      ________      ________
+ SOFTSWEE       0.490
+ GENDER         0.000         0.000
+ AGE            0.000         0.000         0.000
+ FAS_RIDI       0.000         0.000         0.000         0.000
+ UNIDIFF_      -0.093         0.000         0.000         0.000         0.072
+ GNI_STD       -0.274         0.000         0.000         0.000         0.113
+ GINI           0.010         0.000         0.000         0.000        -0.001
+
+
+           Covariances
+              GNI_STD       GINI
+              ________      ________
+ GNI_STD        1.000
+ GINI          -0.016         0.002
+
+
+           Correlations
+              SOFTSWEE      GENDER        AGE           FAS_RIDI      UNIDIFF_
+              ________      ________      ________      ________      ________
+ SOFTSWEE       1.000
+ GENDER         0.000         0.000
+ AGE            0.000         0.000         0.000
+ FAS_RIDI       0.000         0.000         0.000         0.000
+ UNIDIFF_      -0.496         0.000         0.000         0.000         1.000
+ GNI_STD       -0.392         0.000         0.000         0.000         0.421
+ GINI           0.368         0.000         0.000         0.000        -0.063
+
+
+           Correlations
+              GNI_STD       GINI
+              ________      ________
+ GNI_STD        1.000
+ GINI          -0.406         1.000
+
+
+<a name='univariatess' class='heading'>UNIVARIATE SAMPLE STATISTICS</a>
+
+
+     UNIVARIATE HIGHER-ORDER MOMENT DESCRIPTIVE STATISTICS
+
+         Variable/         Mean/     Skewness/   Minimum/ % with                Percentiles
+        Sample Size      Variance    Kurtosis    Maximum  Min/Max      20%/60%    40%/80%    Median
+
+     SOFTSWEETS_SUM        5.547       0.427       0.000    1.68%       3.000      5.000      5.000
+          172224.000       7.764      -0.272      12.000    3.95%       6.000      8.000
+     GENDER                0.000       0.046      -0.506    1.60%      -0.496     -0.479     -0.439
+          172224.000       0.250      -1.995       0.561    1.34%       0.500      0.509
+     AGE                   0.000       0.026      -3.705    0.00%      -1.818     -0.314      0.007
+          172224.000       2.621      -1.326       3.359    0.00%       0.309      1.852
+     FAS_RIDIT             0.000      -0.007      -0.515    0.00%      -0.298     -0.095     -0.005
+          172224.000       0.082      -1.190       0.499    0.00%       0.101      0.286
+     UNIDIFF_CT_REV        0.000       0.381      -0.580    3.12%      -0.290     -0.090     -0.030
+              32.000       0.072       0.744       0.790    3.12%       0.080      0.210
+     GNI_STD               0.000       0.562      -1.403    3.12%      -0.885     -0.593     -0.301
+              32.000       1.000      -0.649       2.270    3.12%       0.347      0.808
+     GINI                  0.000       0.335      -0.068    3.12%      -0.038     -0.018     -0.003
+              32.000       0.002      -0.698       0.082    6.25%       0.002      0.032
+
+<a name='modelmessages' class='heading'></a>
+
+THE MODEL ESTIMATION TERMINATED NORMALLY
+
+
+
+<a name='model_fit' class='heading'>MODEL FIT INFORMATION</a>
+
+Number of Free Parameters                       14
+
+Loglikelihood
+
+          H0 Value                     -415005.089
+          H0 Scaling Correction Factor     10.9852
+            for MLR
+
+Information Criteria
+
+          Akaike (AIC)                  830038.178
+          Bayesian (BIC)                830178.970
+          Sample-Size Adjusted BIC      830134.478
+            (n* = (n + 2) / 24)
+
+
+
+<a name='model_results' class='heading'>MODEL RESULTS</a>
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+Within Level
+
+ SOFTSWEETS ON
+    GENDER             0.304      0.030     10.033      0.000
+    AGE                0.121      0.012      9.850      0.000
+
+ Residual Variances
+    SOFTSWEETS         7.244      0.279     25.951      0.000
+
+Between Level
+
+ SLOPEFAS   ON
+    UNIDIFF_CT         0.466      0.311      1.499      0.134
+    GINI              -1.871      1.941     -0.964      0.335
+    GNI_STD           -0.216      0.115     -1.877      0.061
+
+ SOFTSWEETS ON
+    UNIDIFF_CT        -1.158      0.370     -3.133      0.002
+    GINI               5.468      2.857      1.914      0.056
+    GNI_STD           -0.057      0.116     -0.487      0.626
+
+ SOFTSWEE WITH
+    SLOPEFAS          -0.032      0.040     -0.787      0.431
+
+ Intercepts
+    SOFTSWEETS         5.494      0.099     55.562      0.000
+    SLOPEFAS          -0.189      0.068     -2.774      0.006
+
+ Residual Variances
+    SOFTSWEETS         0.311      0.068      4.599      0.000
+    SLOPEFAS           0.129      0.029      4.498      0.000
+
+
+QUALITY OF NUMERICAL RESULTS
+
+     Condition Number for the Information Matrix              0.443E-07
+       (ratio of smallest to largest eigenvalue)
+
+
+<a name='ci_results' class='heading'>CONFIDENCE INTERVALS OF MODEL RESULTS</a>
+
+                  Lower .5%  Lower 2.5%    Lower 5%    Estimate    Upper 5%  Upper 2.5%   Upper .5%
+
+Within Level
+
+ SOFTSWEE ON
+    GENDER           0.226       0.245       0.254       0.304       0.354       0.364       0.382
+    AGE              0.089       0.097       0.100       0.121       0.141       0.145       0.152
+
+ Residual Variances
+    SOFTSWEETS       6.525       6.697       6.784       7.244       7.703       7.791       7.963
+
+Between Level
+
+ SLOPEFAS ON
+    UNIDIFF_CT      -0.335      -0.143      -0.045       0.466       0.978       1.076       1.267
+    GINI            -6.872      -5.677      -5.065      -1.871       1.322       1.934       3.129
+    GNI_STD         -0.511      -0.441      -0.405      -0.216      -0.027       0.010       0.080
+
+ SOFTSWEE ON
+    UNIDIFF_CT      -2.110      -1.882      -1.766      -1.158      -0.550      -0.433      -0.206
+    GINI            -1.890      -0.131       0.769       5.468      10.167      11.067      12.826
+    GNI_STD         -0.356      -0.285      -0.248      -0.057       0.135       0.171       0.243
+
+ SOFTSWEE WITH
+    SLOPEFAS        -0.135      -0.111      -0.098      -0.032       0.034       0.047       0.072
+
+ Intercepts
+    SOFTSWEETS       5.240       5.300       5.332       5.494       5.657       5.688       5.749
+    SLOPEFAS        -0.364      -0.322      -0.301      -0.189      -0.077      -0.055      -0.014
+
+ Residual Variances
+    SOFTSWEETS       0.137       0.179       0.200       0.311       0.423       0.444       0.486
+    SLOPEFAS         0.055       0.073       0.082       0.129       0.177       0.186       0.203
+
+
+DIAGRAM INFORMATION
+
+  Mplus diagrams are currently not available for multilevel analysis.
+  No diagram output was produced.
+
+
+     Beginning Time:  18:13:14
+        Ending Time:  18:13:21
+       Elapsed Time:  00:00:07
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2022 Muthen & Muthen
+</pre>
+</body>
+</html>
