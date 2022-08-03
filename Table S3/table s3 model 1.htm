@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<style>
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+a:link
+{
+    color: black;
+    text-decoration: none;
+}
+a[name]:hover
+{
+    text-decoration: none;
+}
+a:hover
+{
+    color: blue;
+    text-decoration: underline;
+}
+a:visited
+{
+    color: black;
+    text-decoration: none;
+}
+.heading
+{
+    color: black;
+    font-weight: bold;
+    font-size: 110%;
+}
+.heading:hover
+{
+    color: black;
+    font-weight: bold;
+    font-size: 110%;
+    text-decoration: none;
+}
+</style>
+
+<body style="font-family:'Courier New'; font-size:14px;">
+<p class="heading">
+Mplus VERSION 8.8<br />
+MUTHEN & MUTHEN<br />
+06/08/2022   2:39 PM<br />
+</p>
+
+<p class='heading'>OUTPUT SECTIONS</p>
+
+<ul>
+     <li><a href='#input'>Input Instructions</a></li>
+     <li><a href='#inputmessages'>Input Warnings And Errors</a></li>
+     <li><a href='#summary_analysis'>Summary Of Analysis</a></li>
+     <li><a href='#summary_data'>Summary Of Data</a></li>
+     <li><a href='#samplestats'>Sample Statistics</a></li>
+     <li><a href='#univariatess'>Univariate Sample Statistics</a></li>
+     <li><a href='#modelmessages'>Model Warnings And Errors</a></li>
+     <li><a href='#model_fit'>Model Fit Information</a></li>
+     <li><a href='#model_results'>Model Results</a></li>
+     <li><a href='#ci_results'>Confidence Intervals Of Model Results</a></li>
+</ul>
+<pre>
+
+<a name='input' class='heading'>INPUT INSTRUCTIONS</a>
+
+  Title:
+  Table S3 Model 1;
+  Data:
+    File is HBSC_mplus_07062022.dat ;
+    listwise = ON;
+  Variable:
+    Names are
+       seqno_int age physact60 countries_small countries_small_noSK GNI_std
+       UNIDIFF UNIDIFF_ct UNIDIFF_ct_rev GINI weekly_smoking gender softsweets_sum
+       fruitveg_sum breakfast_days VPA FAS_ridit;
+    Missing are all (-9999) ;
+
+  Usevariables are countries_small VPA gender age FAS_ridit;
+
+  USEOBSERVATIONS ARE (FAS_ridit NE -9999) AND (age NE -9999) AND (gender NE -9999);
+
+  CLUSTER is countries_small;
+
+  WITHIN ARE gender age FAS_ridit;
+
+  DEFINE:
+  center gender age FAS_ridit (groupmean);
+
+  ANALYSIS:
+    TYPE IS TWOLEVEL;
+    ESTIMATOR IS MLR;
+    PROCESS = 3;
+
+  MODEL:
+  %within%
+  VPA ON gender age FAS_ridit;
+
+
+  %between%
+  VPA;
+
+
+
+  OUTPUT: sampstat cinterval;
+
+
+<a name='inputmessages' class='heading'></a>
+
+*** WARNING in VARIABLE command
+  Note that only the first 8 characters of variable names are used in the output.
+  Shorten variable names to avoid any confusion.
+   1 WARNING(S) FOUND IN THE INPUT INSTRUCTIONS
+
+
+
+
+Table S3 Model 1;
+
+<a name='summary_analysis' class='heading'>SUMMARY OF ANALYSIS</a>
+
+Number of groups                                                 1
+Number of observations                                      174119
+
+Number of dependent variables                                    1
+Number of independent variables                                  3
+Number of continuous latent variables                            0
+
+Observed dependent variables
+
+  Continuous
+   VPA
+
+Observed independent variables
+   GENDER      AGE         FAS_RIDI
+
+Variables with special functions
+
+  Cluster variable      COUNTRIE
+
+  Within variables
+   GENDER      AGE         FAS_RIDI
+
+  Centering (GROUPMEAN)
+   GENDER      AGE         FAS_RIDI
+
+
+Estimator                                                      MLR
+Information matrix                                        OBSERVED
+Maximum number of iterations                                   100
+Convergence criterion                                    0.100D-05
+Maximum number of EM iterations                                500
+Convergence criteria for the EM algorithm
+  Loglikelihood change                                   0.100D-02
+  Relative loglikelihood change                          0.100D-05
+  Derivative                                             0.100D-03
+Minimum variance                                         0.100D-03
+Maximum number of steepest descent iterations                   20
+Maximum number of iterations for H1                           2000
+Convergence criterion for H1                             0.100D-03
+Optimization algorithm                                         EMA
+
+Input data file(s)
+  HBSC_mplus_07062022.dat
+Input data format  FREE
+
+
+<a name='summary_data' class='heading'>SUMMARY OF DATA</a>
+
+     Number of clusters                         32
+
+     Average cluster size     5441.219
+
+     Estimated Intraclass Correlations for the Y Variables
+
+                Intraclass
+     Variable  Correlation
+
+     VPA          0.024
+
+
+
+<a name='samplestats' class='heading'>SAMPLE STATISTICS</a>
+
+NOTE:  The sample statistics for within and between refer to the
+       maximum-likelihood estimated within and between covariance
+       matrices, respectively.
+
+
+     ESTIMATED SAMPLE STATISTICS FOR WITHIN
+
+
+           Means
+              VPA           GENDER        AGE           FAS_RIDI
+              ________      ________      ________      ________
+                0.000         0.000         0.000         0.000
+
+
+           Covariances
+              VPA           GENDER        AGE           FAS_RIDI
+              ________      ________      ________      ________
+ VPA            2.460
+ GENDER         0.109         0.250
+ AGE           -0.324        -0.002         2.619
+ FAS_RIDI       0.060         0.000        -0.001         0.082
+
+
+           Correlations
+              VPA           GENDER        AGE           FAS_RIDI
+              ________      ________      ________      ________
+ VPA            1.000
+ GENDER         0.139         1.000
+ AGE           -0.128        -0.002         1.000
+ FAS_RIDI       0.133         0.000        -0.002         1.000
+
+
+     ESTIMATED SAMPLE STATISTICS FOR BETWEEN
+
+
+           Means
+              VPA           GENDER        AGE           FAS_RIDI
+              ________      ________      ________      ________
+                4.029         0.000         0.000         0.000
+
+
+           Covariances
+              VPA           GENDER        AGE           FAS_RIDI
+              ________      ________      ________      ________
+ VPA            0.060
+ GENDER         0.000         0.000
+ AGE            0.000         0.000         0.000
+ FAS_RIDI       0.000         0.000         0.000         0.000
+
+
+           Correlations
+              VPA           GENDER        AGE           FAS_RIDI
+              ________      ________      ________      ________
+ VPA            1.000
+ GENDER         0.000         0.000
+ AGE            0.000         0.000         0.000
+ FAS_RIDI       0.000         0.000         0.000         0.000
+
+
+<a name='univariatess' class='heading'>UNIVARIATE SAMPLE STATISTICS</a>
+
+
+     UNIVARIATE HIGHER-ORDER MOMENT DESCRIPTIVE STATISTICS
+
+         Variable/         Mean/     Skewness/   Minimum/ % with                Percentiles
+        Sample Size      Variance    Kurtosis    Maximum  Min/Max      20%/60%    40%/80%    Median
+
+     VPA                   3.999      -0.955       0.000    5.88%       3.000      4.000      4.000
+          174119.000       2.514       0.495       6.000   16.22%       5.000      5.000
+     GENDER                0.000       0.043      -0.506    1.58%      -0.496     -0.479     -0.452
+          174119.000       0.250      -1.995       0.555    0.42%       0.499      0.510
+     AGE                   0.000       0.023      -3.703    0.00%      -1.821     -0.310      0.005
+          174119.000       2.619      -1.326       3.348    0.00%       0.305      1.849
+     FAS_RIDIT             0.000      -0.005      -0.502    0.00%      -0.299     -0.096     -0.005
+          174119.000       0.082      -1.191       0.500    0.00%       0.100      0.289
+
+<a name='modelmessages' class='heading'></a>
+
+THE MODEL ESTIMATION TERMINATED NORMALLY
+
+
+
+<a name='model_fit' class='heading'>MODEL FIT INFORMATION</a>
+
+Number of Free Parameters                        6
+
+Loglikelihood
+
+          H0 Value                     -320747.140
+          H0 Scaling Correction Factor     27.7950
+            for MLR
+          H1 Value                     -320747.140
+          H1 Scaling Correction Factor     27.7950
+            for MLR
+
+Information Criteria
+
+          Akaike (AIC)                  641506.281
+          Bayesian (BIC)                641566.686
+          Sample-Size Adjusted BIC      641547.617
+            (n* = (n + 2) / 24)
+
+Chi-Square Test of Model Fit
+
+          Value                              0.000*
+          Degrees of Freedom                     0
+          P-Value                           1.0000
+          Scaling Correction Factor         1.0000
+            for MLR
+
+*   The chi-square value for MLM, MLMV, MLR, ULSMV, WLSM and WLSMV cannot be used
+    for chi-square difference testing in the regular way.  MLM, MLR and WLSM
+    chi-square difference testing is described on the Mplus website.  MLMV, WLSMV,
+    and ULSMV difference testing is done using the DIFFTEST option.
+
+RMSEA (Root Mean Square Error Of Approximation)
+
+          Estimate                           0.000
+
+CFI/TLI
+
+          CFI                                1.000
+          TLI                                1.000
+
+Chi-Square Test of Model Fit for the Baseline Model
+
+          Value                            451.987
+          Degrees of Freedom                     3
+          P-Value                           0.0000
+
+SRMR (Standardized Root Mean Square Residual)
+
+          Value for Within                   0.000
+          Value for Between                  0.000
+
+
+
+<a name='model_results' class='heading'>MODEL RESULTS</a>
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+Within Level
+
+ VPA        ON
+    GENDER             0.436      0.036     12.169      0.000
+    AGE               -0.123      0.012    -10.492      0.000
+    FAS_RIDIT          0.731      0.043     16.894      0.000
+
+ Residual Variances
+    VPA                2.329      0.080     29.110      0.000
+
+Between Level
+
+ Means
+    VPA                4.029      0.043     93.025      0.000
+
+ Variances
+    VPA                0.060      0.012      5.074      0.000
+
+
+QUALITY OF NUMERICAL RESULTS
+
+     Condition Number for the Information Matrix              0.170E-03
+       (ratio of smallest to largest eigenvalue)
+
+
+<a name='ci_results' class='heading'>CONFIDENCE INTERVALS OF MODEL RESULTS</a>
+
+                  Lower .5%  Lower 2.5%    Lower 5%    Estimate    Upper 5%  Upper 2.5%   Upper .5%
+
+Within Level
+
+ VPA      ON
+    GENDER           0.344       0.366       0.377       0.436       0.495       0.506       0.528
+    AGE             -0.153      -0.146      -0.142      -0.123      -0.104      -0.100      -0.093
+    FAS_RIDIT        0.619       0.646       0.660       0.731       0.802       0.816       0.842
+
+ Residual Variances
+    VPA              2.123       2.172       2.197       2.329       2.461       2.486       2.535
+
+Between Level
+
+ Means
+    VPA              3.917       3.944       3.957       4.029       4.100       4.114       4.140
+
+ Variances
+    VPA              0.029       0.037       0.040       0.060       0.079       0.083       0.090
+
+
+DIAGRAM INFORMATION
+
+  Mplus diagrams are currently not available for multilevel analysis.
+  No diagram output was produced.
+
+
+     Beginning Time:  14:39:25
+        Ending Time:  14:39:32
+       Elapsed Time:  00:00:07
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2022 Muthen & Muthen
+</pre>
+</body>
+</html>

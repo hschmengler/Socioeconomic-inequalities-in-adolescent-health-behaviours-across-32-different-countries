@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<style>
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+a:link
+{
+    color: black;
+    text-decoration: none;
+}
+a[name]:hover
+{
+    text-decoration: none;
+}
+a:hover
+{
+    color: blue;
+    text-decoration: underline;
+}
+a:visited
+{
+    color: black;
+    text-decoration: none;
+}
+.heading
+{
+    color: black;
+    font-weight: bold;
+    font-size: 110%;
+}
+.heading:hover
+{
+    color: black;
+    font-weight: bold;
+    font-size: 110%;
+    text-decoration: none;
+}
+</style>
+
+<body style="font-family:'Courier New'; font-size:14px;">
+<p class="heading">
+Mplus VERSION 8.8<br />
+MUTHEN & MUTHEN<br />
+06/07/2022   8:11 PM<br />
+</p>
+
+<p class='heading'>OUTPUT SECTIONS</p>
+
+<ul>
+     <li><a href='#input'>Input Instructions</a></li>
+     <li><a href='#inputmessages'>Input Warnings And Errors</a></li>
+     <li><a href='#summary_analysis'>Summary Of Analysis</a></li>
+     <li><a href='#summary_data'>Summary Of Data</a></li>
+     <li><a href='#covariance_coverage'>Covariance Coverage Of Data</a></li>
+     <li><a href='#samplestats'>Sample Statistics</a></li>
+     <li><a href='#univariatess'>Univariate Sample Statistics</a></li>
+     <li><a href='#modelmessages'>Model Warnings And Errors</a></li>
+     <li><a href='#model_fit'>Model Fit Information</a></li>
+     <li><a href='#model_results'>Model Results</a></li>
+     <li><a href='#ci_results'>Confidence Intervals Of Model Results</a></li>
+</ul>
+<pre>
+
+<a name='input' class='heading'>INPUT INSTRUCTIONS</a>
+
+  Title:
+  Table S3 Model 0;
+  Data:
+    File is HBSC_mplus_07062022.dat ;
+  Variable:
+    Names are
+       seqno_int age physact60 countries_small countries_small_noSK GNI_std
+       UNIDIFF UNIDIFF_ct UNIDIFF_ct_rev GINI weekly_smoking gender softsweets_sum
+       fruitveg_sum breakfast_days VPA FAS_ridit;
+    Missing are all (-9999) ;
+
+  Usevariables are countries_small VPA;
+
+  USEOBSERVATIONS ARE (FAS_ridit NE -9999) AND (age NE -9999) AND (gender NE -9999);
+
+  CLUSTER is countries_small;
+
+
+  ANALYSIS:
+    TYPE IS TWOLEVEL;
+    ESTIMATOR IS MLR;
+    PROCESS = 3;
+
+  MODEL:
+  %within%
+  VPA;
+
+
+  %between%
+  VPA;
+
+
+
+  OUTPUT: sampstat cinterval;
+
+
+<a name='inputmessages' class='heading'></a>
+
+*** WARNING in MODEL command
+  Variable is uncorrelated with all other variables: VPA
+*** WARNING in MODEL command
+  At least one variable is uncorrelated with all other variables in the model.
+  Check that this is what is intended.
+*** WARNING
+  Data set contains cases with missing on all variables.
+  These cases were not included in the analysis.
+  Number of cases with missing on all variables:  2549
+   3 WARNING(S) FOUND IN THE INPUT INSTRUCTIONS
+
+
+
+
+Table S3 Model 0;
+
+<a name='summary_analysis' class='heading'>SUMMARY OF ANALYSIS</a>
+
+Number of groups                                                 1
+Number of observations                                      174119
+
+Number of dependent variables                                    1
+Number of independent variables                                  0
+Number of continuous latent variables                            0
+
+Observed dependent variables
+
+  Continuous
+   VPA
+
+Variables with special functions
+
+  Cluster variable      COUNTRIE
+
+Estimator                                                      MLR
+Information matrix                                        OBSERVED
+Maximum number of iterations                                   100
+Convergence criterion                                    0.100D-05
+Maximum number of EM iterations                                500
+Convergence criteria for the EM algorithm
+  Loglikelihood change                                   0.100D-02
+  Relative loglikelihood change                          0.100D-05
+  Derivative                                             0.100D-03
+Minimum variance                                         0.100D-03
+Maximum number of steepest descent iterations                   20
+Maximum number of iterations for H1                           2000
+Convergence criterion for H1                             0.100D-03
+Optimization algorithm                                         EMA
+
+Input data file(s)
+  HBSC_mplus_07062022.dat
+Input data format  FREE
+
+
+<a name='summary_data' class='heading'>SUMMARY OF DATA</a>
+
+     Number of missing data patterns             1
+     Number of clusters                         32
+
+     Average cluster size     5441.219
+
+     Estimated Intraclass Correlations for the Y Variables
+
+                Intraclass
+     Variable  Correlation
+
+     VPA          0.024
+
+
+
+<a name='covariance_coverage' class='heading'>COVARIANCE COVERAGE OF DATA</a>
+
+Minimum covariance coverage value   0.100
+
+
+     PROPORTION OF DATA PRESENT
+
+
+           Covariance Coverage
+              VPA
+              ________
+ VPA            1.000
+
+
+<a name='samplestats' class='heading'>SAMPLE STATISTICS</a>
+
+NOTE:  The sample statistics for within and between refer to the
+       maximum-likelihood estimated within and between covariance
+       matrices, respectively.
+
+
+     ESTIMATED SAMPLE STATISTICS FOR WITHIN
+
+
+           Means
+              VPA
+              ________
+                0.000
+
+
+           Covariances
+              VPA
+              ________
+ VPA            2.460
+
+
+           Correlations
+              VPA
+              ________
+ VPA            1.000
+
+
+     ESTIMATED SAMPLE STATISTICS FOR BETWEEN
+
+
+           Means
+              VPA
+              ________
+                4.029
+
+
+           Covariances
+              VPA
+              ________
+ VPA            0.059
+
+
+           Correlations
+              VPA
+              ________
+ VPA            1.000
+
+
+     MAXIMUM LOG-LIKELIHOOD VALUE FOR THE UNRESTRICTED (H1) MODEL IS -325516.450
+
+
+<a name='univariatess' class='heading'>UNIVARIATE SAMPLE STATISTICS</a>
+
+
+     UNIVARIATE HIGHER-ORDER MOMENT DESCRIPTIVE STATISTICS
+
+         Variable/         Mean/     Skewness/   Minimum/ % with                Percentiles
+        Sample Size      Variance    Kurtosis    Maximum  Min/Max      20%/60%    40%/80%    Median
+
+     VPA                   3.999      -0.955       0.000    5.88%       3.000      4.000      4.000
+          174119.000       2.514       0.495       6.000   16.22%       5.000      5.000
+
+<a name='modelmessages' class='heading'></a>
+
+THE MODEL ESTIMATION TERMINATED NORMALLY
+
+
+
+<a name='model_fit' class='heading'>MODEL FIT INFORMATION</a>
+
+Number of Free Parameters                        3
+
+Loglikelihood
+
+          H0 Value                     -325516.450
+          H0 Scaling Correction Factor     34.4861
+            for MLR
+          H1 Value                     -325516.450
+          H1 Scaling Correction Factor     34.4861
+            for MLR
+
+Information Criteria
+
+          Akaike (AIC)                  651038.901
+          Bayesian (BIC)                651069.103
+          Sample-Size Adjusted BIC      651059.569
+            (n* = (n + 2) / 24)
+
+Chi-Square Test of Model Fit
+
+          Value                              0.000*
+          Degrees of Freedom                     0
+          P-Value                           0.0000
+          Scaling Correction Factor         1.0000
+            for MLR
+
+*   The chi-square value for MLM, MLMV, MLR, ULSMV, WLSM and WLSMV cannot be used
+    for chi-square difference testing in the regular way.  MLM, MLR and WLSM
+    chi-square difference testing is described on the Mplus website.  MLMV, WLSMV,
+    and ULSMV difference testing is done using the DIFFTEST option.
+
+RMSEA (Root Mean Square Error Of Approximation)
+
+          Estimate                           0.000
+
+CFI/TLI
+
+          CFI                                0.000
+          TLI                                1.000
+
+Chi-Square Test of Model Fit for the Baseline Model
+
+          Value                              0.000
+          Degrees of Freedom                     0
+          P-Value                           1.0000
+
+SRMR (Standardized Root Mean Square Residual)
+
+          Value for Within                   0.000
+          Value for Between                  0.000
+
+
+
+<a name='model_results' class='heading'>MODEL RESULTS</a>
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+Within Level
+
+ Variances
+    VPA                2.460      0.084     29.234      0.000
+
+Between Level
+
+ Means
+    VPA                4.029      0.043     93.051      0.000
+
+ Variances
+    VPA                0.060      0.012      5.069      0.000
+
+
+QUALITY OF NUMERICAL RESULTS
+
+     Condition Number for the Information Matrix              0.539E-03
+       (ratio of smallest to largest eigenvalue)
+
+
+<a name='ci_results' class='heading'>CONFIDENCE INTERVALS OF MODEL RESULTS</a>
+
+                  Lower .5%  Lower 2.5%    Lower 5%    Estimate    Upper 5%  Upper 2.5%   Upper .5%
+
+Within Level
+
+ Variances
+    VPA              2.243       2.295       2.322       2.460       2.599       2.625       2.677
+
+Between Level
+
+ Means
+    VPA              3.917       3.944       3.958       4.029       4.100       4.114       4.140
+
+ Variances
+    VPA              0.029       0.037       0.040       0.060       0.079       0.083       0.090
+
+
+DIAGRAM INFORMATION
+
+  Mplus diagrams are currently not available for multilevel analysis.
+  No diagram output was produced.
+
+
+     Beginning Time:  20:11:35
+        Ending Time:  20:11:41
+       Elapsed Time:  00:00:06
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2022 Muthen & Muthen
+</pre>
+</body>
+</html>
