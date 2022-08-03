@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<style>
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+a:link
+{
+    color: black;
+    text-decoration: none;
+}
+a[name]:hover
+{
+    text-decoration: none;
+}
+a:hover
+{
+    color: blue;
+    text-decoration: underline;
+}
+a:visited
+{
+    color: black;
+    text-decoration: none;
+}
+.heading
+{
+    color: black;
+    font-weight: bold;
+    font-size: 110%;
+}
+.heading:hover
+{
+    color: black;
+    font-weight: bold;
+    font-size: 110%;
+    text-decoration: none;
+}
+</style>
+
+<body style="font-family:'Courier New'; font-size:14px;">
+<p class="heading">
+Mplus VERSION 8.8<br />
+MUTHEN & MUTHEN<br />
+06/08/2022   6:08 PM<br />
+</p>
+
+<p class='heading'>OUTPUT SECTIONS</p>
+
+<ul>
+     <li><a href='#input'>Input Instructions</a></li>
+     <li><a href='#inputmessages'>Input Warnings And Errors</a></li>
+     <li><a href='#summary_analysis'>Summary Of Analysis</a></li>
+     <li><a href='#summary_data'>Summary Of Data</a></li>
+     <li><a href='#samplestats'>Sample Statistics</a></li>
+     <li><a href='#univariatess'>Univariate Sample Statistics</a></li>
+     <li><a href='#modelmessages'>Model Warnings And Errors</a></li>
+     <li><a href='#model_fit'>Model Fit Information</a></li>
+     <li><a href='#model_results'>Model Results</a></li>
+     <li><a href='#ci_results'>Confidence Intervals Of Model Results</a></li>
+</ul>
+<pre>
+
+<a name='input' class='heading'>INPUT INSTRUCTIONS</a>
+
+  Title:
+  Table S4 Model 4;
+  Data:
+    File is HBSC_mplus_07062022.dat ;
+    listwise = ON;
+  Variable:
+    Names are
+       seqno_int age physact60 countries_small countries_small_noSK GNI_std
+       UNIDIFF UNIDIFF_ct UNIDIFF_ct_rev GINI weekly_smoking gender softsweets_sum
+       fruitveg_sum breakfast_days VPA FAS_ridit;
+    Missing are all (-9999) ;
+
+  Usevariables are countries_small fruitveg_sum gender age FAS_ridit
+  UNIDIFF_ct_rev GNI_std GINI;
+
+  USEOBSERVATIONS ARE (FAS_ridit NE -9999) AND (age NE -9999) AND (gender NE -9999);
+
+  CLUSTER is countries_small;
+
+  WITHIN ARE gender age FAS_ridit;
+
+  BETWEEN ARE UNIDIFF_ct_rev GNI_std GINI;
+
+  DEFINE:
+  center gender age FAS_ridit (groupmean);
+  center UNIDIFF_ct_rev GNI_std GINI (grandmean);
+
+  ANALYSIS:
+    TYPE IS TWOLEVEL RANDOM;
+    ESTIMATOR IS MLR;
+    PROCESS = 3;
+
+  MODEL:
+  %within%
+  slopeFAS | fruitveg_sum ON FAS_ridit;
+  fruitveg_sum ON gender age;
+
+
+  %between%
+  fruitveg_sum ON UNIDIFF_ct_rev GINI GNI_std;
+  fruitveg_sum WITH slopeFAS;
+
+  slopeFAS ON UNIDIFF_ct_rev GINI GNI_std;
+
+  OUTPUT: sampstat cinterval;
+
+
+<a name='inputmessages' class='heading'></a>
+
+*** WARNING in VARIABLE command
+  Note that only the first 8 characters of variable names are used in the output.
+  Shorten variable names to avoid any confusion.
+   1 WARNING(S) FOUND IN THE INPUT INSTRUCTIONS
+
+
+
+
+Table S4 Model 4;
+
+<a name='summary_analysis' class='heading'>SUMMARY OF ANALYSIS</a>
+
+Number of groups                                                 1
+Number of observations                                      172240
+
+Number of dependent variables                                    1
+Number of independent variables                                  6
+Number of continuous latent variables                            1
+
+Observed dependent variables
+
+  Continuous
+   FRUITVEG_S
+
+Observed independent variables
+   GENDER      AGE         FAS_RIDI    UNIDIFF_    GNI_STD     GINI
+
+Continuous latent variables
+   SLOPEFAS
+
+Variables with special functions
+
+  Cluster variable      COUNTRIE
+
+  Within variables
+   GENDER      AGE         FAS_RIDI
+
+  Between variables
+   UNIDIFF_    GNI_STD     GINI
+
+  Centering (GRANDMEAN)
+   UNIDIFF_    GNI_STD     GINI
+
+  Centering (GROUPMEAN)
+   GENDER      AGE         FAS_RIDI
+
+
+Estimator                                                      MLR
+Information matrix                                        OBSERVED
+Maximum number of iterations                                   100
+Convergence criterion                                    0.100D-05
+Maximum number of EM iterations                                500
+Convergence criteria for the EM algorithm
+  Loglikelihood change                                   0.100D-02
+  Relative loglikelihood change                          0.100D-05
+  Derivative                                             0.100D-03
+Minimum variance                                         0.100D-03
+Maximum number of steepest descent iterations                   20
+Maximum number of iterations for H1                           2000
+Convergence criterion for H1                             0.100D-03
+Optimization algorithm                                         EMA
+
+Input data file(s)
+  HBSC_mplus_07062022.dat
+Input data format  FREE
+
+
+<a name='summary_data' class='heading'>SUMMARY OF DATA</a>
+
+     Number of clusters                         32
+
+     Average cluster size     5382.500
+
+     Estimated Intraclass Correlations for the Y Variables
+
+                Intraclass              Intraclass
+     Variable  Correlation   Variable  Correlation
+
+     FRUITVEG     0.022
+
+
+
+<a name='samplestats' class='heading'>SAMPLE STATISTICS</a>
+
+NOTE:  The sample statistics for within and between refer to the
+       maximum-likelihood estimated within and between covariance
+       matrices, respectively.
+
+
+     ESTIMATED SAMPLE STATISTICS FOR WITHIN
+
+
+           Means
+              FRUITVEG      GENDER        AGE           FAS_RIDI      UNIDIFF_
+              ________      ________      ________      ________      ________
+                0.000         0.000         0.000         0.000         0.000
+
+
+           Means
+              GNI_STD       GINI
+              ________      ________
+                0.000         0.000
+
+
+           Covariances
+              FRUITVEG      GENDER        AGE           FAS_RIDI      UNIDIFF_
+              ________      ________      ________      ________      ________
+ FRUITVEG       8.046
+ GENDER        -0.135         0.250
+ AGE           -0.413        -0.001         2.621
+ FAS_RIDI       0.109         0.000        -0.001         0.082
+ UNIDIFF_       0.000         0.000         0.000         0.000         0.000
+ GNI_STD        0.000         0.000         0.000         0.000         0.000
+ GINI           0.000         0.000         0.000         0.000         0.000
+
+
+           Covariances
+              GNI_STD       GINI
+              ________      ________
+ GNI_STD        0.000
+ GINI           0.000         0.000
+
+
+           Correlations
+              FRUITVEG      GENDER        AGE           FAS_RIDI      UNIDIFF_
+              ________      ________      ________      ________      ________
+ FRUITVEG       1.000
+ GENDER        -0.095         1.000
+ AGE           -0.090        -0.002         1.000
+ FAS_RIDI       0.135         0.001        -0.002         1.000
+ UNIDIFF_       0.000         0.000         0.000         0.000         0.000
+ GNI_STD        0.000         0.000         0.000         0.000         0.000
+ GINI           0.000         0.000         0.000         0.000         0.000
+
+
+           Correlations
+              GNI_STD       GINI
+              ________      ________
+ GNI_STD        0.000
+ GINI           0.000         0.000
+
+
+     ESTIMATED SAMPLE STATISTICS FOR BETWEEN
+
+
+           Means
+              FRUITVEG      GENDER        AGE           FAS_RIDI      UNIDIFF_
+              ________      ________      ________      ________      ________
+                7.643         0.000         0.000         0.000         0.000
+
+
+           Means
+              GNI_STD       GINI
+              ________      ________
+                0.000         0.000
+
+
+           Covariances
+              FRUITVEG      GENDER        AGE           FAS_RIDI      UNIDIFF_
+              ________      ________      ________      ________      ________
+ FRUITVEG       0.181
+ GENDER         0.000         0.000
+ AGE            0.000         0.000         0.000
+ FAS_RIDI       0.000         0.000         0.000         0.000
+ UNIDIFF_      -0.001         0.000         0.000         0.000         0.072
+ GNI_STD        0.000         0.000         0.000         0.000         0.113
+ GINI           0.000         0.000         0.000         0.000        -0.001
+
+
+           Covariances
+              GNI_STD       GINI
+              ________      ________
+ GNI_STD        1.000
+ GINI          -0.016         0.002
+
+
+           Correlations
+              FRUITVEG      GENDER        AGE           FAS_RIDI      UNIDIFF_
+              ________      ________      ________      ________      ________
+ FRUITVEG       1.000
+ GENDER         0.000         0.000
+ AGE            0.000         0.000         0.000
+ FAS_RIDI       0.000         0.000         0.000         0.000
+ UNIDIFF_      -0.008         0.000         0.000         0.000         1.000
+ GNI_STD        0.000         0.000         0.000         0.000         0.421
+ GINI          -0.010         0.000         0.000         0.000        -0.063
+
+
+           Correlations
+              GNI_STD       GINI
+              ________      ________
+ GNI_STD        1.000
+ GINI          -0.406         1.000
+
+
+<a name='univariatess' class='heading'>UNIVARIATE SAMPLE STATISTICS</a>
+
+
+     UNIVARIATE HIGHER-ORDER MOMENT DESCRIPTIVE STATISTICS
+
+         Variable/         Mean/     Skewness/   Minimum/ % with                Percentiles
+        Sample Size      Variance    Kurtosis    Maximum  Min/Max      20%/60%    40%/80%    Median
+
+     FRUITVEG_SUM          7.640      -0.317       0.000    1.23%       5.000      7.000      8.000
+          172240.000       8.191      -0.438      12.000   11.20%       8.000     10.000
+     GENDER                0.000       0.046      -0.506    1.60%      -0.496     -0.479     -0.439
+          172240.000       0.250      -1.995       0.561    1.34%       0.500      0.509
+     AGE                   0.000       0.026      -3.706    0.00%      -1.818     -0.314      0.007
+          172240.000       2.621      -1.326       3.359    0.00%       0.309      1.852
+     FAS_RIDIT             0.000      -0.007      -0.515    0.00%      -0.298     -0.095     -0.005
+          172240.000       0.082      -1.189       0.499    0.00%       0.101      0.286
+     UNIDIFF_CT_REV        0.000       0.381      -0.580    3.12%      -0.290     -0.090     -0.030
+              32.000       0.072       0.744       0.790    3.12%       0.080      0.210
+     GNI_STD               0.000       0.562      -1.403    3.12%      -0.885     -0.593     -0.301
+              32.000       1.000      -0.649       2.270    3.12%       0.347      0.808
+     GINI                  0.000       0.335      -0.068    3.12%      -0.038     -0.018     -0.003
+              32.000       0.002      -0.698       0.082    6.25%       0.002      0.032
+
+<a name='modelmessages' class='heading'></a>
+
+THE MODEL ESTIMATION TERMINATED NORMALLY
+
+
+
+<a name='model_fit' class='heading'>MODEL FIT INFORMATION</a>
+
+Number of Free Parameters                       14
+
+Loglikelihood
+
+          H0 Value                     -420856.996
+          H0 Scaling Correction Factor      6.3390
+            for MLR
+
+Information Criteria
+
+          Akaike (AIC)                  841741.993
+          Bayesian (BIC)                841882.786
+          Sample-Size Adjusted BIC      841838.293
+            (n* = (n + 2) / 24)
+
+
+
+<a name='model_results' class='heading'>MODEL RESULTS</a>
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+Within Level
+
+ FRUITVEG_S ON
+    GENDER            -0.544      0.029    -18.485      0.000
+    AGE               -0.157      0.012    -13.166      0.000
+
+ Residual Variances
+    FRUITVEG_S         7.751      0.212     36.632      0.000
+
+Between Level
+
+ SLOPEFAS   ON
+    UNIDIFF_CT         0.174      0.247      0.705      0.481
+    GINI               1.042      1.368      0.762      0.446
+    GNI_STD           -0.032      0.054     -0.599      0.549
+
+ FRUITVEG_S ON
+    UNIDIFF_CT        -0.014      0.259     -0.054      0.957
+    GINI              -0.115      2.571     -0.045      0.964
+    GNI_STD            0.000      0.094     -0.001      0.999
+
+ FRUITVEG WITH
+    SLOPEFAS          -0.020      0.029     -0.703      0.482
+
+ Intercepts
+    FRUITVEG_S         7.643      0.076    101.096      0.000
+    SLOPEFAS           1.254      0.055     22.716      0.000
+
+ Residual Variances
+    FRUITVEG_S         0.181      0.052      3.501      0.000
+    SLOPEFAS           0.080      0.028      2.839      0.005
+
+
+QUALITY OF NUMERICAL RESULTS
+
+     Condition Number for the Information Matrix              0.846E-07
+       (ratio of smallest to largest eigenvalue)
+
+
+<a name='ci_results' class='heading'>CONFIDENCE INTERVALS OF MODEL RESULTS</a>
+
+                  Lower .5%  Lower 2.5%    Lower 5%    Estimate    Upper 5%  Upper 2.5%   Upper .5%
+
+Within Level
+
+ FRUITVEG ON
+    GENDER          -0.619      -0.601      -0.592      -0.544      -0.495      -0.486      -0.468
+    AGE             -0.188      -0.181      -0.177      -0.157      -0.138      -0.134      -0.127
+
+ Residual Variances
+    FRUITVEG_S       7.206       7.336       7.403       7.751       8.099       8.166       8.296
+
+Between Level
+
+ SLOPEFAS ON
+    UNIDIFF_CT      -0.462      -0.310      -0.232       0.174       0.580       0.658       0.810
+    GINI            -2.481      -1.639      -1.208       1.042       3.292       3.723       4.566
+    GNI_STD         -0.171      -0.138      -0.121      -0.032       0.056       0.073       0.107
+
+ FRUITVEG ON
+    UNIDIFF_CT      -0.681      -0.521      -0.440      -0.014       0.412       0.493       0.653
+    GINI            -6.738      -5.154      -4.344      -0.115       4.115       4.924       6.508
+    GNI_STD         -0.243      -0.185      -0.155       0.000       0.155       0.185       0.243
+
+ FRUITVEG WITH
+    SLOPEFAS        -0.094      -0.076      -0.067      -0.020       0.027       0.036       0.054
+
+ Intercepts
+    FRUITVEG_S       7.449       7.495       7.519       7.643       7.768       7.792       7.838
+    SLOPEFAS         1.112       1.146       1.163       1.254       1.344       1.362       1.396
+
+ Residual Variances
+    FRUITVEG_S       0.048       0.080       0.096       0.181       0.266       0.282       0.314
+    SLOPEFAS         0.007       0.025       0.034       0.080       0.126       0.135       0.152
+
+
+DIAGRAM INFORMATION
+
+  Mplus diagrams are currently not available for multilevel analysis.
+  No diagram output was produced.
+
+
+     Beginning Time:  18:08:08
+        Ending Time:  18:08:16
+       Elapsed Time:  00:00:08
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2022 Muthen & Muthen
+</pre>
+</body>
+</html>
