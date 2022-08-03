@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<style>
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+a:link
+{
+    color: black;
+    text-decoration: none;
+}
+a[name]:hover
+{
+    text-decoration: none;
+}
+a:hover
+{
+    color: blue;
+    text-decoration: underline;
+}
+a:visited
+{
+    color: black;
+    text-decoration: none;
+}
+.heading
+{
+    color: black;
+    font-weight: bold;
+    font-size: 110%;
+}
+.heading:hover
+{
+    color: black;
+    font-weight: bold;
+    font-size: 110%;
+    text-decoration: none;
+}
+</style>
+
+<body style="font-family:'Courier New'; font-size:14px;">
+<p class="heading">
+Mplus VERSION 8.8<br />
+MUTHEN & MUTHEN<br />
+06/08/2022   3:28 PM<br />
+</p>
+
+<p class='heading'>OUTPUT SECTIONS</p>
+
+<ul>
+     <li><a href='#input'>Input Instructions</a></li>
+     <li><a href='#inputmessages'>Input Warnings And Errors</a></li>
+     <li><a href='#summary_analysis'>Summary Of Analysis</a></li>
+     <li><a href='#summary_data'>Summary Of Data</a></li>
+     <li><a href='#catprops'>Univariate Proportions And Counts For Categorical Variables</a></li>
+     <li><a href='#samplestats'>Sample Statistics</a></li>
+     <li><a href='#univariatess'>Univariate Sample Statistics</a></li>
+     <li><a href='#modelmessages'>Model Warnings And Errors</a></li>
+     <li><a href='#model_fit'>Model Fit Information</a></li>
+     <li><a href='#model_results'>Model Results</a></li>
+     <li><a href='#results_probscale'>Results In Probability Scale</a></li>
+     <li><a href='#logregodds'>Logistic Regression Odds Ratio Results</a></li>
+     <li><a href='#ci_results'>Confidence Intervals Of Model Results</a></li>
+     <li><a href='#ci_logregodds'>Confidence Intervals For The Logistic Regression Odds Ratio Results</a></li>
+</ul>
+<pre>
+
+<a name='input' class='heading'>INPUT INSTRUCTIONS</a>
+
+  Title:
+  Table S7 Model 2;
+  Data:
+    File is HBSC_mplus_07062022.dat ;
+    listwise = ON;
+  Variable:
+    Names are
+       seqno_int age physact60 countries_small countries_small_noSK GNI_std
+       UNIDIFF UNIDIFF_ct UNIDIFF_ct_rev GINI weekly_smoking gender softsweets_sum
+       fruitveg_sum breakfast_days VPA FAS_ridit;
+    Missing are all (-9999) ;
+
+  Usevariables are countries_small weekly_smoking gender age FAS_ridit
+  UNIDIFF_ct_rev GNI_std GINI;
+
+  USEOBSERVATIONS ARE (FAS_ridit NE -9999) AND (age NE -9999) AND (gender NE -9999);
+
+  categorical is weekly_smoking;
+
+  CLUSTER is countries_small;
+
+  WITHIN ARE gender age FAS_ridit;
+
+  BETWEEN ARE UNIDIFF_ct_rev GNI_std GINI;
+
+  DEFINE:
+  center gender age FAS_ridit (groupmean);
+  center UNIDIFF_ct_rev GNI_std GINI (grandmean);
+
+  ANALYSIS:
+    TYPE IS TWOLEVEL;
+    ESTIMATOR IS MLR;
+    PROCESS = 3;
+
+  MODEL:
+  %within%
+  weekly_smoking ON gender age FAS_ridit;
+
+
+  %between%
+  weekly_smoking ON UNIDIFF_ct_rev GINI GNI_std;
+
+
+
+  OUTPUT: sampstat cinterval;
+
+
+<a name='inputmessages' class='heading'></a>
+
+*** WARNING in VARIABLE command
+  Note that only the first 8 characters of variable names are used in the output.
+  Shorten variable names to avoid any confusion.
+   1 WARNING(S) FOUND IN THE INPUT INSTRUCTIONS
+
+
+
+
+Table S7 Model 2;
+
+<a name='summary_analysis' class='heading'>SUMMARY OF ANALYSIS</a>
+
+Number of groups                                                 1
+Number of observations                                      168271
+
+Number of dependent variables                                    1
+Number of independent variables                                  6
+Number of continuous latent variables                            0
+
+Observed dependent variables
+
+  Binary and ordered categorical (ordinal)
+   WEEKLY_S
+
+Observed independent variables
+   GENDER      AGE         FAS_RIDI    UNIDIFF_    GNI_STD     GINI
+
+Variables with special functions
+
+  Cluster variable      COUNTRIE
+
+  Within variables
+   GENDER      AGE         FAS_RIDI
+
+  Between variables
+   UNIDIFF_    GNI_STD     GINI
+
+  Centering (GRANDMEAN)
+   UNIDIFF_    GNI_STD     GINI
+
+  Centering (GROUPMEAN)
+   GENDER      AGE         FAS_RIDI
+
+
+Estimator                                                      MLR
+Information matrix                                        OBSERVED
+Optimization Specifications for the Quasi-Newton Algorithm for
+Continuous Outcomes
+  Maximum number of iterations                                 100
+  Convergence criterion                                  0.100D-05
+Optimization Specifications for the EM Algorithm
+  Maximum number of iterations                                 500
+  Convergence criteria
+    Loglikelihood change                                 0.100D-02
+    Relative loglikelihood change                        0.100D-05
+    Derivative                                           0.100D-02
+Optimization Specifications for the M step of the EM Algorithm for
+Categorical Latent variables
+  Number of M step iterations                                    1
+  M step convergence criterion                           0.100D-02
+  Basis for M step termination                           ITERATION
+Optimization Specifications for the M step of the EM Algorithm for
+Censored, Binary or Ordered Categorical (Ordinal), Unordered
+Categorical (Nominal) and Count Outcomes
+  Number of M step iterations                                    1
+  M step convergence criterion                           0.100D-02
+  Basis for M step termination                           ITERATION
+  Maximum value for logit thresholds                            15
+  Minimum value for logit thresholds                           -15
+  Minimum expected cell size for chi-square              0.100D-01
+Optimization algorithm                                         EMA
+Integration Specifications
+  Type                                                    STANDARD
+  Number of integration points                                  15
+  Dimensions of numerical integration                            1
+  Adaptive quadrature                                           ON
+Link                                                         LOGIT
+Cholesky                                                        ON
+
+Input data file(s)
+  HBSC_mplus_07062022.dat
+Input data format  FREE
+
+
+<a name='summary_data' class='heading'>SUMMARY OF DATA</a>
+
+     Number of clusters                         32
+
+
+
+<a name='catprops' class='heading'>UNIVARIATE PROPORTIONS AND COUNTS FOR CATEGORICAL VARIABLES</a>
+
+    WEEKLY_S
+      Category 1    0.952       160257.000
+      Category 2    0.048         8014.000
+
+
+<a name='samplestats' class='heading'>SAMPLE STATISTICS</a>
+
+
+     SAMPLE STATISTICS
+
+
+           Means
+              GENDER        AGE           FAS_RIDI      UNIDIFF_      GNI_STD
+              ________      ________      ________      ________      ________
+                0.000         0.000         0.000         0.038         0.063
+
+
+           Means
+              GINI
+              ________
+               -0.002
+
+
+           Covariances
+              GENDER        AGE           FAS_RIDI      UNIDIFF_      GNI_STD
+              ________      ________      ________      ________      ________
+ GENDER         0.250
+ AGE           -0.002         2.605
+ FAS_RIDI       0.000         0.000         0.082
+ UNIDIFF_       0.000         0.000         0.000         0.078
+ GNI_STD        0.000         0.000         0.000         0.111         0.855
+ GINI           0.000         0.000         0.000         0.001        -0.008
+
+
+           Covariances
+              GINI
+              ________
+ GINI           0.001
+
+
+           Correlations
+              GENDER        AGE           FAS_RIDI      UNIDIFF_      GNI_STD
+              ________      ________      ________      ________      ________
+ GENDER         1.000
+ AGE           -0.002         1.000
+ FAS_RIDI      -0.001        -0.001         1.000
+ UNIDIFF_       0.000         0.000         0.000         1.000
+ GNI_STD        0.000         0.000         0.000         0.429         1.000
+ GINI           0.000         0.000         0.000         0.054        -0.228
+
+
+           Correlations
+              GINI
+              ________
+ GINI           1.000
+
+
+<a name='univariatess' class='heading'>UNIVARIATE SAMPLE STATISTICS</a>
+
+
+     UNIVARIATE HIGHER-ORDER MOMENT DESCRIPTIVE STATISTICS
+
+         Variable/         Mean/     Skewness/   Minimum/ % with                Percentiles
+        Sample Size      Variance    Kurtosis    Maximum  Min/Max      20%/60%    40%/80%    Median
+
+     GENDER                0.000       0.045      -0.506    1.63%      -0.496     -0.479     -0.445
+          168271.000       0.250      -1.995       0.559    0.68%       0.500      0.509
+     AGE                   0.000       0.021      -3.697    0.00%      -1.821     -0.309      0.000
+          168271.000       2.605      -1.324       3.127    0.00%       0.312      1.853
+     FAS_RIDIT             0.000      -0.005      -0.502    0.00%      -0.298     -0.096     -0.004
+          168271.000       0.082      -1.190       0.499    0.00%       0.100      0.289
+     UNIDIFF_CT_REV        0.000       0.381      -0.580    3.12%      -0.290     -0.090     -0.030
+              32.000       0.072       0.744       0.790    3.12%       0.080      0.210
+     GNI_STD               0.000       0.562      -1.403    3.12%      -0.885     -0.593     -0.301
+              32.000       1.000      -0.649       2.270    3.12%       0.347      0.808
+     GINI                  0.000       0.335      -0.068    3.12%      -0.038     -0.018     -0.003
+              32.000       0.002      -0.698       0.082    6.25%       0.002      0.032
+
+<a name='modelmessages' class='heading'></a>
+
+THE MODEL ESTIMATION TERMINATED NORMALLY
+
+
+
+<a name='model_fit' class='heading'>MODEL FIT INFORMATION</a>
+
+Number of Free Parameters                        8
+
+Loglikelihood
+
+          H0 Value                      -28021.651
+          H0 Scaling Correction Factor      3.1639
+            for MLR
+
+Information Criteria
+
+          Akaike (AIC)                   56059.302
+          Bayesian (BIC)                 56139.568
+          Sample-Size Adjusted BIC       56114.144
+            (n* = (n + 2) / 24)
+
+
+
+<a name='model_results' class='heading'>MODEL RESULTS</a>
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+Within Level
+
+ WEEKLY_SMO ON
+    GENDER             0.045      0.071      0.636      0.525
+    AGE                0.698      0.028     24.788      0.000
+    FAS_RIDIT         -0.294      0.077     -3.808      0.000
+
+Between Level
+
+ WEEKLY_SMO ON
+    UNIDIFF_CT        -0.583      0.144     -4.053      0.000
+    GINI               2.992      1.735      1.724      0.085
+    GNI_STD           -0.162      0.051     -3.184      0.001
+
+ Thresholds
+    WEEKLY_S$1         3.528      0.066     53.255      0.000
+
+ Residual Variances
+    WEEKLY_SMO         0.094      0.028      3.400      0.001
+
+
+QUALITY OF NUMERICAL RESULTS
+
+     Condition Number for the Information Matrix              0.338E-05
+       (ratio of smallest to largest eigenvalue)
+
+
+<a name='results_probscale' class='heading'>RESULTS IN PROBABILITY SCALE</a>
+
+                    Estimate
+
+Within Level
+
+
+Between Level
+
+ WEEKLY_S
+    Category 1         0.951
+    Category 2         0.049
+
+
+<a name='logregodds' class='heading'>LOGISTIC REGRESSION ODDS RATIO RESULTS</a>
+
+                                                95% C.I.
+                    Estimate       S.E.  Lower 2.5% Upper 2.5%
+
+Within Level
+
+ WEEKLY_SMO ON
+    GENDER             1.046      0.074      0.911      1.201
+    AGE                2.009      0.057      1.901      2.123
+    FAS_RIDIT          0.745      0.058      0.641      0.867
+
+
+<a name='ci_results' class='heading'>CONFIDENCE INTERVALS OF MODEL RESULTS</a>
+
+                  Lower .5%  Lower 2.5%    Lower 5%    Estimate    Upper 5%  Upper 2.5%   Upper .5%
+
+Within Level
+
+ WEEKLY_S ON
+    GENDER          -0.137      -0.093      -0.071       0.045       0.161       0.183       0.227
+    AGE              0.625       0.642       0.651       0.698       0.744       0.753       0.770
+    FAS_RIDIT       -0.493      -0.445      -0.421      -0.294      -0.167      -0.143      -0.095
+
+ Thresholds
+    WEEKLY_SMO       3.358       3.399       3.419       3.528       3.637       3.658       3.699
+
+Between Level
+
+ WEEKLY_S ON
+    UNIDIFF_CT      -0.954      -0.865      -0.820      -0.583      -0.346      -0.301      -0.212
+    GINI            -1.478      -0.409       0.138       2.992       5.847       6.394       7.463
+    GNI_STD         -0.293      -0.262      -0.246      -0.162      -0.078      -0.062      -0.031
+
+ Thresholds
+    WEEKLY_SMO       3.358       3.399       3.419       3.528       3.637       3.658       3.699
+
+ Residual Variances
+    WEEKLY_SMO       0.023       0.040       0.048       0.094       0.139       0.148       0.165
+
+
+<a name='ci_logregodds' class='heading'>CONFIDENCE INTERVALS FOR THE LOGISTIC REGRESSION ODDS RATIO RESULTS</a>
+
+Within Level
+
+ WEEKLY_S ON
+    GENDER           0.872       0.911       0.931       1.046       1.175       1.201       1.254
+    AGE              1.869       1.901       1.918       2.009       2.104       2.123       2.160
+    FAS_RIDIT        0.611       0.641       0.656       0.745       0.846       0.867       0.909
+
+
+DIAGRAM INFORMATION
+
+  Mplus diagrams are currently not available for multilevel analysis.
+  No diagram output was produced.
+
+
+     Beginning Time:  15:28:44
+        Ending Time:  15:30:22
+       Elapsed Time:  00:01:38
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2022 Muthen & Muthen
+</pre>
+</body>
+</html>
