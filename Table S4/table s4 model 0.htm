@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<style>
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+a:link
+{
+    color: black;
+    text-decoration: none;
+}
+a[name]:hover
+{
+    text-decoration: none;
+}
+a:hover
+{
+    color: blue;
+    text-decoration: underline;
+}
+a:visited
+{
+    color: black;
+    text-decoration: none;
+}
+.heading
+{
+    color: black;
+    font-weight: bold;
+    font-size: 110%;
+}
+.heading:hover
+{
+    color: black;
+    font-weight: bold;
+    font-size: 110%;
+    text-decoration: none;
+}
+</style>
+
+<body style="font-family:'Courier New'; font-size:14px;">
+<p class="heading">
+Mplus VERSION 8.8<br />
+MUTHEN & MUTHEN<br />
+06/07/2022   8:14 PM<br />
+</p>
+
+<p class='heading'>OUTPUT SECTIONS</p>
+
+<ul>
+     <li><a href='#input'>Input Instructions</a></li>
+     <li><a href='#inputmessages'>Input Warnings And Errors</a></li>
+     <li><a href='#summary_analysis'>Summary Of Analysis</a></li>
+     <li><a href='#summary_data'>Summary Of Data</a></li>
+     <li><a href='#covariance_coverage'>Covariance Coverage Of Data</a></li>
+     <li><a href='#samplestats'>Sample Statistics</a></li>
+     <li><a href='#univariatess'>Univariate Sample Statistics</a></li>
+     <li><a href='#modelmessages'>Model Warnings And Errors</a></li>
+     <li><a href='#model_fit'>Model Fit Information</a></li>
+     <li><a href='#model_results'>Model Results</a></li>
+     <li><a href='#ci_results'>Confidence Intervals Of Model Results</a></li>
+</ul>
+<pre>
+
+<a name='input' class='heading'>INPUT INSTRUCTIONS</a>
+
+  Title:
+  Table S4 Model 0;
+  Data:
+    File is HBSC_mplus_07062022.dat ;
+  Variable:
+    Names are
+       seqno_int age physact60 countries_small countries_small_noSK GNI_std
+       UNIDIFF UNIDIFF_ct UNIDIFF_ct_rev GINI weekly_smoking gender softsweets_sum
+       fruitveg_sum breakfast_days VPA FAS_ridit;
+    Missing are all (-9999) ;
+
+  Usevariables are countries_small fruitveg_sum;
+
+  USEOBSERVATIONS ARE (FAS_ridit NE -9999) AND (age NE -9999) AND (gender NE -9999);
+
+  CLUSTER is countries_small;
+
+
+  ANALYSIS:
+    TYPE IS TWOLEVEL;
+    ESTIMATOR IS MLR;
+    PROCESS = 3;
+
+  MODEL:
+  %within%
+  fruitveg_sum;
+
+
+  %between%
+  fruitveg_sum;
+
+
+
+  OUTPUT: sampstat cinterval;
+
+
+<a name='inputmessages' class='heading'></a>
+
+*** WARNING in VARIABLE command
+  Note that only the first 8 characters of variable names are used in the output.
+  Shorten variable names to avoid any confusion.
+*** WARNING in MODEL command
+  Variable is uncorrelated with all other variables: FRUITVEG_SUM
+*** WARNING in MODEL command
+  At least one variable is uncorrelated with all other variables in the model.
+  Check that this is what is intended.
+*** WARNING
+  Data set contains cases with missing on all variables.
+  These cases were not included in the analysis.
+  Number of cases with missing on all variables:  4428
+   4 WARNING(S) FOUND IN THE INPUT INSTRUCTIONS
+
+
+
+
+Table S4 Model 0;
+
+<a name='summary_analysis' class='heading'>SUMMARY OF ANALYSIS</a>
+
+Number of groups                                                 1
+Number of observations                                      172240
+
+Number of dependent variables                                    1
+Number of independent variables                                  0
+Number of continuous latent variables                            0
+
+Observed dependent variables
+
+  Continuous
+   FRUITVEG_S
+
+Variables with special functions
+
+  Cluster variable      COUNTRIE
+
+Estimator                                                      MLR
+Information matrix                                        OBSERVED
+Maximum number of iterations                                   100
+Convergence criterion                                    0.100D-05
+Maximum number of EM iterations                                500
+Convergence criteria for the EM algorithm
+  Loglikelihood change                                   0.100D-02
+  Relative loglikelihood change                          0.100D-05
+  Derivative                                             0.100D-03
+Minimum variance                                         0.100D-03
+Maximum number of steepest descent iterations                   20
+Maximum number of iterations for H1                           2000
+Convergence criterion for H1                             0.100D-03
+Optimization algorithm                                         EMA
+
+Input data file(s)
+  HBSC_mplus_07062022.dat
+Input data format  FREE
+
+
+<a name='summary_data' class='heading'>SUMMARY OF DATA</a>
+
+     Number of missing data patterns             1
+     Number of clusters                         32
+
+     Average cluster size     5382.500
+
+     Estimated Intraclass Correlations for the Y Variables
+
+                Intraclass
+     Variable  Correlation
+
+     FRUITVEG     0.022
+
+
+
+<a name='covariance_coverage' class='heading'>COVARIANCE COVERAGE OF DATA</a>
+
+Minimum covariance coverage value   0.100
+
+
+     PROPORTION OF DATA PRESENT
+
+
+           Covariance Coverage
+              FRUITVEG
+              ________
+ FRUITVEG       1.000
+
+
+<a name='samplestats' class='heading'>SAMPLE STATISTICS</a>
+
+NOTE:  The sample statistics for within and between refer to the
+       maximum-likelihood estimated within and between covariance
+       matrices, respectively.
+
+
+     ESTIMATED SAMPLE STATISTICS FOR WITHIN
+
+
+           Means
+              FRUITVEG
+              ________
+                0.000
+
+
+           Covariances
+              FRUITVEG
+              ________
+ FRUITVEG       8.046
+
+
+           Correlations
+              FRUITVEG
+              ________
+ FRUITVEG       1.000
+
+
+     ESTIMATED SAMPLE STATISTICS FOR BETWEEN
+
+
+           Means
+              FRUITVEG
+              ________
+                7.643
+
+
+           Covariances
+              FRUITVEG
+              ________
+ FRUITVEG       0.181
+
+
+           Correlations
+              FRUITVEG
+              ________
+ FRUITVEG       1.000
+
+
+     MAXIMUM LOG-LIKELIHOOD VALUE FOR THE UNRESTRICTED (H1) MODEL IS -424052.725
+
+
+<a name='univariatess' class='heading'>UNIVARIATE SAMPLE STATISTICS</a>
+
+
+     UNIVARIATE HIGHER-ORDER MOMENT DESCRIPTIVE STATISTICS
+
+         Variable/         Mean/     Skewness/   Minimum/ % with                Percentiles
+        Sample Size      Variance    Kurtosis    Maximum  Min/Max      20%/60%    40%/80%    Median
+
+     FRUITVEG_SUM          7.640      -0.317       0.000    1.23%       5.000      7.000      8.000
+          172240.000       8.191      -0.438      12.000   11.20%       8.000     10.000
+
+<a name='modelmessages' class='heading'></a>
+
+THE MODEL ESTIMATION TERMINATED NORMALLY
+
+
+
+<a name='model_fit' class='heading'>MODEL FIT INFORMATION</a>
+
+Number of Free Parameters                        3
+
+Loglikelihood
+
+          H0 Value                     -424052.725
+          H0 Scaling Correction Factor     23.8177
+            for MLR
+          H1 Value                     -424052.725
+          H1 Scaling Correction Factor     23.8177
+            for MLR
+
+Information Criteria
+
+          Akaike (AIC)                  848111.451
+          Bayesian (BIC)                848141.621
+          Sample-Size Adjusted BIC      848132.086
+            (n* = (n + 2) / 24)
+
+Chi-Square Test of Model Fit
+
+          Value                              0.000*
+          Degrees of Freedom                     0
+          P-Value                           0.0000
+          Scaling Correction Factor         1.0000
+            for MLR
+
+*   The chi-square value for MLM, MLMV, MLR, ULSMV, WLSM and WLSMV cannot be used
+    for chi-square difference testing in the regular way.  MLM, MLR and WLSM
+    chi-square difference testing is described on the Mplus website.  MLMV, WLSMV,
+    and ULSMV difference testing is done using the DIFFTEST option.
+
+RMSEA (Root Mean Square Error Of Approximation)
+
+          Estimate                           0.000
+
+CFI/TLI
+
+          CFI                                0.000
+          TLI                                1.000
+
+Chi-Square Test of Model Fit for the Baseline Model
+
+          Value                              0.000
+          Degrees of Freedom                     0
+          P-Value                           1.0000
+
+SRMR (Standardized Root Mean Square Residual)
+
+          Value for Within                   0.000
+          Value for Between                  0.001
+
+
+
+<a name='model_results' class='heading'>MODEL RESULTS</a>
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+Within Level
+
+ Variances
+    FRUITVEG_S         8.046      0.228     35.266      0.000
+
+Between Level
+
+ Means
+    FRUITVEG_S         7.644      0.076    101.160      0.000
+
+ Variances
+    FRUITVEG_S         0.181      0.051      3.558      0.000
+
+
+QUALITY OF NUMERICAL RESULTS
+
+     Condition Number for the Information Matrix              0.315E-03
+       (ratio of smallest to largest eigenvalue)
+
+
+<a name='ci_results' class='heading'>CONFIDENCE INTERVALS OF MODEL RESULTS</a>
+
+                  Lower .5%  Lower 2.5%    Lower 5%    Estimate    Upper 5%  Upper 2.5%   Upper .5%
+
+Within Level
+
+ Variances
+    FRUITVEG_S       7.459       7.599       7.671       8.046       8.422       8.494       8.634
+
+Between Level
+
+ Means
+    FRUITVEG_S       7.449       7.495       7.519       7.644       7.768       7.792       7.838
+
+ Variances
+    FRUITVEG_S       0.050       0.081       0.097       0.181       0.264       0.280       0.312
+
+
+DIAGRAM INFORMATION
+
+  Mplus diagrams are currently not available for multilevel analysis.
+  No diagram output was produced.
+
+
+     Beginning Time:  20:14:18
+        Ending Time:  20:14:24
+       Elapsed Time:  00:00:06
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2022 Muthen & Muthen
+</pre>
+</body>
+</html>

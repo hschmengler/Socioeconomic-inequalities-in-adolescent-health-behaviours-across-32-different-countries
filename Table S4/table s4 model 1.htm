@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<style>
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+a:link
+{
+    color: black;
+    text-decoration: none;
+}
+a[name]:hover
+{
+    text-decoration: none;
+}
+a:hover
+{
+    color: blue;
+    text-decoration: underline;
+}
+a:visited
+{
+    color: black;
+    text-decoration: none;
+}
+.heading
+{
+    color: black;
+    font-weight: bold;
+    font-size: 110%;
+}
+.heading:hover
+{
+    color: black;
+    font-weight: bold;
+    font-size: 110%;
+    text-decoration: none;
+}
+</style>
+
+<body style="font-family:'Courier New'; font-size:14px;">
+<p class="heading">
+Mplus VERSION 8.8<br />
+MUTHEN & MUTHEN<br />
+06/08/2022   2:42 PM<br />
+</p>
+
+<p class='heading'>OUTPUT SECTIONS</p>
+
+<ul>
+     <li><a href='#input'>Input Instructions</a></li>
+     <li><a href='#inputmessages'>Input Warnings And Errors</a></li>
+     <li><a href='#summary_analysis'>Summary Of Analysis</a></li>
+     <li><a href='#summary_data'>Summary Of Data</a></li>
+     <li><a href='#samplestats'>Sample Statistics</a></li>
+     <li><a href='#univariatess'>Univariate Sample Statistics</a></li>
+     <li><a href='#modelmessages'>Model Warnings And Errors</a></li>
+     <li><a href='#model_fit'>Model Fit Information</a></li>
+     <li><a href='#model_results'>Model Results</a></li>
+     <li><a href='#ci_results'>Confidence Intervals Of Model Results</a></li>
+</ul>
+<pre>
+
+<a name='input' class='heading'>INPUT INSTRUCTIONS</a>
+
+  Title:
+  Table S4 Model 1;
+  Data:
+    File is HBSC_mplus_07062022.dat ;
+    listwise = ON;
+  Variable:
+    Names are
+       seqno_int age physact60 countries_small countries_small_noSK GNI_std
+       UNIDIFF UNIDIFF_ct UNIDIFF_ct_rev GINI weekly_smoking gender softsweets_sum
+       fruitveg_sum breakfast_days VPA FAS_ridit;
+    Missing are all (-9999) ;
+
+  Usevariables are countries_small fruitveg_sum gender age FAS_ridit;
+
+  USEOBSERVATIONS ARE (FAS_ridit NE -9999) AND (age NE -9999) AND (gender NE -9999);
+
+  CLUSTER is countries_small;
+
+  WITHIN ARE gender age FAS_ridit;
+
+  DEFINE:
+  center gender age FAS_ridit (groupmean);
+
+  ANALYSIS:
+    TYPE IS TWOLEVEL;
+    ESTIMATOR IS MLR;
+    PROCESS = 3;
+
+  MODEL:
+  %within%
+  fruitveg_sum ON gender age FAS_ridit;
+
+
+  %between%
+  fruitveg_sum;
+
+
+
+  OUTPUT: sampstat cinterval;
+
+
+<a name='inputmessages' class='heading'></a>
+
+*** WARNING in VARIABLE command
+  Note that only the first 8 characters of variable names are used in the output.
+  Shorten variable names to avoid any confusion.
+   1 WARNING(S) FOUND IN THE INPUT INSTRUCTIONS
+
+
+
+
+Table S4 Model 1;
+
+<a name='summary_analysis' class='heading'>SUMMARY OF ANALYSIS</a>
+
+Number of groups                                                 1
+Number of observations                                      172240
+
+Number of dependent variables                                    1
+Number of independent variables                                  3
+Number of continuous latent variables                            0
+
+Observed dependent variables
+
+  Continuous
+   FRUITVEG_S
+
+Observed independent variables
+   GENDER      AGE         FAS_RIDI
+
+Variables with special functions
+
+  Cluster variable      COUNTRIE
+
+  Within variables
+   GENDER      AGE         FAS_RIDI
+
+  Centering (GROUPMEAN)
+   GENDER      AGE         FAS_RIDI
+
+
+Estimator                                                      MLR
+Information matrix                                        OBSERVED
+Maximum number of iterations                                   100
+Convergence criterion                                    0.100D-05
+Maximum number of EM iterations                                500
+Convergence criteria for the EM algorithm
+  Loglikelihood change                                   0.100D-02
+  Relative loglikelihood change                          0.100D-05
+  Derivative                                             0.100D-03
+Minimum variance                                         0.100D-03
+Maximum number of steepest descent iterations                   20
+Maximum number of iterations for H1                           2000
+Convergence criterion for H1                             0.100D-03
+Optimization algorithm                                         EMA
+
+Input data file(s)
+  HBSC_mplus_07062022.dat
+Input data format  FREE
+
+
+<a name='summary_data' class='heading'>SUMMARY OF DATA</a>
+
+     Number of clusters                         32
+
+     Average cluster size     5382.500
+
+     Estimated Intraclass Correlations for the Y Variables
+
+                Intraclass
+     Variable  Correlation
+
+     FRUITVEG     0.022
+
+
+
+<a name='samplestats' class='heading'>SAMPLE STATISTICS</a>
+
+NOTE:  The sample statistics for within and between refer to the
+       maximum-likelihood estimated within and between covariance
+       matrices, respectively.
+
+
+     ESTIMATED SAMPLE STATISTICS FOR WITHIN
+
+
+           Means
+              FRUITVEG      GENDER        AGE           FAS_RIDI
+              ________      ________      ________      ________
+                0.000         0.000         0.000         0.000
+
+
+           Covariances
+              FRUITVEG      GENDER        AGE           FAS_RIDI
+              ________      ________      ________      ________
+ FRUITVEG       8.046
+ GENDER        -0.135         0.250
+ AGE           -0.413        -0.001         2.621
+ FAS_RIDI       0.109         0.000        -0.001         0.082
+
+
+           Correlations
+              FRUITVEG      GENDER        AGE           FAS_RIDI
+              ________      ________      ________      ________
+ FRUITVEG       1.000
+ GENDER        -0.095         1.000
+ AGE           -0.090        -0.002         1.000
+ FAS_RIDI       0.135         0.001        -0.002         1.000
+
+
+     ESTIMATED SAMPLE STATISTICS FOR BETWEEN
+
+
+           Means
+              FRUITVEG      GENDER        AGE           FAS_RIDI
+              ________      ________      ________      ________
+                7.643         0.000         0.000         0.000
+
+
+           Covariances
+              FRUITVEG      GENDER        AGE           FAS_RIDI
+              ________      ________      ________      ________
+ FRUITVEG       0.181
+ GENDER         0.000         0.000
+ AGE            0.000         0.000         0.000
+ FAS_RIDI       0.000         0.000         0.000         0.000
+
+
+           Correlations
+              FRUITVEG      GENDER        AGE           FAS_RIDI
+              ________      ________      ________      ________
+ FRUITVEG       1.000
+ GENDER         0.000         0.000
+ AGE            0.000         0.000         0.000
+ FAS_RIDI       0.000         0.000         0.000         0.000
+
+
+<a name='univariatess' class='heading'>UNIVARIATE SAMPLE STATISTICS</a>
+
+
+     UNIVARIATE HIGHER-ORDER MOMENT DESCRIPTIVE STATISTICS
+
+         Variable/         Mean/     Skewness/   Minimum/ % with                Percentiles
+        Sample Size      Variance    Kurtosis    Maximum  Min/Max      20%/60%    40%/80%    Median
+
+     FRUITVEG_SUM          7.640      -0.317       0.000    1.23%       5.000      7.000      8.000
+          172240.000       8.191      -0.438      12.000   11.20%       8.000     10.000
+     GENDER                0.000       0.046      -0.506    1.60%      -0.496     -0.479     -0.439
+          172240.000       0.250      -1.995       0.561    1.34%       0.500      0.509
+     AGE                   0.000       0.026      -3.706    0.00%      -1.818     -0.314      0.007
+          172240.000       2.621      -1.326       3.359    0.00%       0.309      1.852
+     FAS_RIDIT             0.000      -0.007      -0.515    0.00%      -0.298     -0.095     -0.005
+          172240.000       0.082      -1.189       0.499    0.00%       0.101      0.286
+
+<a name='modelmessages' class='heading'></a>
+
+THE MODEL ESTIMATION TERMINATED NORMALLY
+
+
+
+<a name='model_fit' class='heading'>MODEL FIT INFORMATION</a>
+
+Number of Free Parameters                        6
+
+Loglikelihood
+
+          H0 Value                     -420945.116
+          H0 Scaling Correction Factor     16.8700
+            for MLR
+          H1 Value                     -420945.116
+          H1 Scaling Correction Factor     16.8700
+            for MLR
+
+Information Criteria
+
+          Akaike (AIC)                  841902.232
+          Bayesian (BIC)                841962.572
+          Sample-Size Adjusted BIC      841943.504
+            (n* = (n + 2) / 24)
+
+Chi-Square Test of Model Fit
+
+          Value                              0.000*
+          Degrees of Freedom                     0
+          P-Value                           0.0000
+          Scaling Correction Factor         1.0000
+            for MLR
+
+*   The chi-square value for MLM, MLMV, MLR, ULSMV, WLSM and WLSMV cannot be used
+    for chi-square difference testing in the regular way.  MLM, MLR and WLSM
+    chi-square difference testing is described on the Mplus website.  MLMV, WLSMV,
+    and ULSMV difference testing is done using the DIFFTEST option.
+
+RMSEA (Root Mean Square Error Of Approximation)
+
+          Estimate                           0.000
+
+CFI/TLI
+
+          CFI                                1.000
+          TLI                                1.000
+
+Chi-Square Test of Model Fit for the Baseline Model
+
+          Value                            626.404
+          Degrees of Freedom                     3
+          P-Value                           0.0000
+
+SRMR (Standardized Root Mean Square Residual)
+
+          Value for Within                   0.000
+          Value for Between                  0.000
+
+
+
+<a name='model_results' class='heading'>MODEL RESULTS</a>
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+Within Level
+
+ FRUITVEG_S ON
+    GENDER            -0.543      0.029    -18.487      0.000
+    AGE               -0.157      0.012    -13.174      0.000
+    FAS_RIDIT          1.341      0.107     12.554      0.000
+
+ Residual Variances
+    FRUITVEG_S         7.761      0.214     36.322      0.000
+
+Between Level
+
+ Means
+    FRUITVEG_S         7.644      0.076    101.152      0.000
+
+ Variances
+    FRUITVEG_S         0.181      0.051      3.563      0.000
+
+
+QUALITY OF NUMERICAL RESULTS
+
+     Condition Number for the Information Matrix              0.305E-03
+       (ratio of smallest to largest eigenvalue)
+
+
+<a name='ci_results' class='heading'>CONFIDENCE INTERVALS OF MODEL RESULTS</a>
+
+                  Lower .5%  Lower 2.5%    Lower 5%    Estimate    Upper 5%  Upper 2.5%   Upper .5%
+
+Within Level
+
+ FRUITVEG ON
+    GENDER          -0.619      -0.601      -0.592      -0.543      -0.495      -0.486      -0.468
+    AGE             -0.188      -0.181      -0.177      -0.157      -0.138      -0.134      -0.127
+    FAS_RIDIT        1.066       1.131       1.165       1.341       1.516       1.550       1.616
+
+ Residual Variances
+    FRUITVEG_S       7.211       7.342       7.410       7.761       8.113       8.180       8.312
+
+Between Level
+
+ Means
+    FRUITVEG_S       7.449       7.495       7.519       7.644       7.768       7.792       7.838
+
+ Variances
+    FRUITVEG_S       0.050       0.081       0.097       0.181       0.264       0.280       0.311
+
+
+DIAGRAM INFORMATION
+
+  Mplus diagrams are currently not available for multilevel analysis.
+  No diagram output was produced.
+
+
+     Beginning Time:  14:42:58
+        Ending Time:  14:43:03
+       Elapsed Time:  00:00:05
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2022 Muthen & Muthen
+</pre>
+</body>
+</html>
