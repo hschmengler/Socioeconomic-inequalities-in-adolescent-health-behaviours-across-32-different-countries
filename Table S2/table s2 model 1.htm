@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<style>
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+a:link
+{
+    color: black;
+    text-decoration: none;
+}
+a[name]:hover
+{
+    text-decoration: none;
+}
+a:hover
+{
+    color: blue;
+    text-decoration: underline;
+}
+a:visited
+{
+    color: black;
+    text-decoration: none;
+}
+.heading
+{
+    color: black;
+    font-weight: bold;
+    font-size: 110%;
+}
+.heading:hover
+{
+    color: black;
+    font-weight: bold;
+    font-size: 110%;
+    text-decoration: none;
+}
+</style>
+
+<body style="font-family:'Courier New'; font-size:14px;">
+<p class="heading">
+Mplus VERSION 8.8<br />
+MUTHEN & MUTHEN<br />
+06/08/2022   2:32 PM<br />
+</p>
+
+<p class='heading'>OUTPUT SECTIONS</p>
+
+<ul>
+     <li><a href='#input'>Input Instructions</a></li>
+     <li><a href='#inputmessages'>Input Warnings And Errors</a></li>
+     <li><a href='#summary_analysis'>Summary Of Analysis</a></li>
+     <li><a href='#summary_data'>Summary Of Data</a></li>
+     <li><a href='#samplestats'>Sample Statistics</a></li>
+     <li><a href='#univariatess'>Univariate Sample Statistics</a></li>
+     <li><a href='#modelmessages'>Model Warnings And Errors</a></li>
+     <li><a href='#model_fit'>Model Fit Information</a></li>
+     <li><a href='#model_results'>Model Results</a></li>
+     <li><a href='#ci_results'>Confidence Intervals Of Model Results</a></li>
+</ul>
+<pre>
+
+<a name='input' class='heading'>INPUT INSTRUCTIONS</a>
+
+  Title:
+  Table S2 Model 1;
+  Data:
+    File is HBSC_mplus_07062022.dat ;
+    listwise = ON;
+  Variable:
+    Names are
+       seqno_int age physact60 countries_small countries_small_noSK GNI_std
+       UNIDIFF UNIDIFF_ct UNIDIFF_ct_rev GINI weekly_smoking gender softsweets_sum
+       fruitveg_sum breakfast_days VPA FAS_ridit;
+    Missing are all (-9999) ;
+
+  Usevariables are countries_small physact60 gender age FAS_ridit;
+
+  USEOBSERVATIONS ARE (FAS_ridit NE -9999) AND (age NE -9999) AND (gender NE -9999);
+
+  CLUSTER is countries_small;
+
+  WITHIN ARE gender age FAS_ridit;
+
+  DEFINE:
+  center gender age FAS_ridit (groupmean);
+
+  ANALYSIS:
+    TYPE IS TWOLEVEL;
+    ESTIMATOR IS MLR;
+    PROCESS = 3;
+
+  MODEL:
+  %within%
+  physact60 ON gender age FAS_ridit;
+
+
+  %between%
+  physact60;
+
+
+
+  OUTPUT: sampstat cinterval;
+
+
+<a name='inputmessages' class='heading'></a>
+
+*** WARNING in VARIABLE command
+  Note that only the first 8 characters of variable names are used in the output.
+  Shorten variable names to avoid any confusion.
+   1 WARNING(S) FOUND IN THE INPUT INSTRUCTIONS
+
+
+
+
+Table S2 Model 1;
+
+<a name='summary_analysis' class='heading'>SUMMARY OF ANALYSIS</a>
+
+Number of groups                                                 1
+Number of observations                                      173580
+
+Number of dependent variables                                    1
+Number of independent variables                                  3
+Number of continuous latent variables                            0
+
+Observed dependent variables
+
+  Continuous
+   PHYSACT60
+
+Observed independent variables
+   GENDER      AGE         FAS_RIDI
+
+Variables with special functions
+
+  Cluster variable      COUNTRIE
+
+  Within variables
+   GENDER      AGE         FAS_RIDI
+
+  Centering (GROUPMEAN)
+   GENDER      AGE         FAS_RIDI
+
+
+Estimator                                                      MLR
+Information matrix                                        OBSERVED
+Maximum number of iterations                                   100
+Convergence criterion                                    0.100D-05
+Maximum number of EM iterations                                500
+Convergence criteria for the EM algorithm
+  Loglikelihood change                                   0.100D-02
+  Relative loglikelihood change                          0.100D-05
+  Derivative                                             0.100D-03
+Minimum variance                                         0.100D-03
+Maximum number of steepest descent iterations                   20
+Maximum number of iterations for H1                           2000
+Convergence criterion for H1                             0.100D-03
+Optimization algorithm                                         EMA
+
+Input data file(s)
+  HBSC_mplus_07062022.dat
+Input data format  FREE
+
+
+<a name='summary_data' class='heading'>SUMMARY OF DATA</a>
+
+     Number of clusters                         32
+
+     Average cluster size     5424.375
+
+     Estimated Intraclass Correlations for the Y Variables
+
+                Intraclass
+     Variable  Correlation
+
+     PHYSACT6     0.039
+
+
+
+<a name='samplestats' class='heading'>SAMPLE STATISTICS</a>
+
+NOTE:  The sample statistics for within and between refer to the
+       maximum-likelihood estimated within and between covariance
+       matrices, respectively.
+
+
+     ESTIMATED SAMPLE STATISTICS FOR WITHIN
+
+
+           Means
+              PHYSACT6      GENDER        AGE           FAS_RIDI
+              ________      ________      ________      ________
+                0.000         0.000         0.000         0.000
+
+
+           Covariances
+              PHYSACT6      GENDER        AGE           FAS_RIDI
+              ________      ________      ________      ________
+ PHYSACT6       4.054
+ GENDER         0.124         0.250
+ AGE           -0.453        -0.002         2.618
+ FAS_RIDI       0.080         0.000        -0.001         0.082
+
+
+           Correlations
+              PHYSACT6      GENDER        AGE           FAS_RIDI
+              ________      ________      ________      ________
+ PHYSACT6       1.000
+ GENDER         0.123         1.000
+ AGE           -0.139        -0.002         1.000
+ FAS_RIDI       0.139         0.000        -0.002         1.000
+
+
+     ESTIMATED SAMPLE STATISTICS FOR BETWEEN
+
+
+           Means
+              PHYSACT6      GENDER        AGE           FAS_RIDI
+              ________      ________      ________      ________
+                4.099         0.000         0.000         0.000
+
+
+           Covariances
+              PHYSACT6      GENDER        AGE           FAS_RIDI
+              ________      ________      ________      ________
+ PHYSACT6       0.165
+ GENDER         0.000         0.000
+ AGE            0.000         0.000         0.000
+ FAS_RIDI       0.000         0.000         0.000         0.000
+
+
+           Correlations
+              PHYSACT6      GENDER        AGE           FAS_RIDI
+              ________      ________      ________      ________
+ PHYSACT6       1.000
+ GENDER         0.000         0.000
+ AGE            0.000         0.000         0.000
+ FAS_RIDI       0.000         0.000         0.000         0.000
+
+
+<a name='univariatess' class='heading'>UNIVARIATE SAMPLE STATISTICS</a>
+
+
+     UNIVARIATE HIGHER-ORDER MOMENT DESCRIPTIVE STATISTICS
+
+         Variable/         Mean/     Skewness/   Minimum/ % with                Percentiles
+        Sample Size      Variance    Kurtosis    Maximum  Min/Max      20%/60%    40%/80%    Median
+
+     PHYSACT60             4.074      -0.153       0.000    4.98%       2.000      3.000      4.000
+          173580.000       4.218      -0.931       7.000   17.85%       5.000      6.000
+     GENDER                0.000       0.042      -0.507    1.35%      -0.495     -0.478     -0.452
+          173580.000       0.250      -1.995       0.553    0.42%       0.498      0.510
+     AGE                   0.000       0.023      -3.708    0.00%      -1.818     -0.311      0.005
+          173580.000       2.618      -1.325       3.381    0.00%       0.303      1.852
+     FAS_RIDIT             0.000      -0.007      -0.503    0.00%      -0.299     -0.095     -0.005
+          173580.000       0.082      -1.191       0.500    0.00%       0.100      0.291
+
+<a name='modelmessages' class='heading'></a>
+
+THE MODEL ESTIMATION TERMINATED NORMALLY
+
+
+
+<a name='model_fit' class='heading'>MODEL FIT INFORMATION</a>
+
+Number of Free Parameters                        6
+
+Loglikelihood
+
+          H0 Value                     -363083.892
+          H0 Scaling Correction Factor     13.1289
+            for MLR
+          H1 Value                     -363083.892
+          H1 Scaling Correction Factor     13.1289
+            for MLR
+
+Information Criteria
+
+          Akaike (AIC)                  726179.784
+          Bayesian (BIC)                726240.171
+          Sample-Size Adjusted BIC      726221.103
+            (n* = (n + 2) / 24)
+
+Chi-Square Test of Model Fit
+
+          Value                              0.000*
+          Degrees of Freedom                     0
+          P-Value                           0.0000
+          Scaling Correction Factor         1.0000
+            for MLR
+
+*   The chi-square value for MLM, MLMV, MLR, ULSMV, WLSM and WLSMV cannot be used
+    for chi-square difference testing in the regular way.  MLM, MLR and WLSM
+    chi-square difference testing is described on the Mplus website.  MLMV, WLSMV,
+    and ULSMV difference testing is done using the DIFFTEST option.
+
+RMSEA (Root Mean Square Error Of Approximation)
+
+          Estimate                           0.000
+
+CFI/TLI
+
+          CFI                                1.000
+          TLI                                1.000
+
+Chi-Square Test of Model Fit for the Baseline Model
+
+          Value                            543.994
+          Degrees of Freedom                     3
+          P-Value                           0.0000
+
+SRMR (Standardized Root Mean Square Residual)
+
+          Value for Within                   0.000
+          Value for Between                  0.000
+
+
+
+<a name='model_results' class='heading'>MODEL RESULTS</a>
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+Within Level
+
+ PHYSACT60  ON
+    GENDER             0.496      0.034     14.492      0.000
+    AGE               -0.173      0.015    -11.308      0.000
+    FAS_RIDIT          0.975      0.044     22.203      0.000
+
+ Residual Variances
+    PHYSACT60          3.837      0.070     55.035      0.000
+
+Between Level
+
+ Means
+    PHYSACT60          4.100      0.072     56.952      0.000
+
+ Variances
+    PHYSACT60          0.165      0.045      3.658      0.000
+
+
+QUALITY OF NUMERICAL RESULTS
+
+     Condition Number for the Information Matrix              0.806E-04
+       (ratio of smallest to largest eigenvalue)
+
+
+<a name='ci_results' class='heading'>CONFIDENCE INTERVALS OF MODEL RESULTS</a>
+
+                  Lower .5%  Lower 2.5%    Lower 5%    Estimate    Upper 5%  Upper 2.5%   Upper .5%
+
+Within Level
+
+ PHYSACT6 ON
+    GENDER           0.408       0.429       0.439       0.496       0.552       0.563       0.584
+    AGE             -0.212      -0.202      -0.198      -0.173      -0.147      -0.143      -0.133
+    FAS_RIDIT        0.862       0.889       0.903       0.975       1.047       1.061       1.088
+
+ Residual Variances
+    PHYSACT60        3.657       3.700       3.722       3.837       3.951       3.973       4.016
+
+Between Level
+
+ Means
+    PHYSACT60        3.914       3.958       3.981       4.100       4.218       4.241       4.285
+
+ Variances
+    PHYSACT60        0.049       0.077       0.091       0.165       0.239       0.253       0.281
+
+
+DIAGRAM INFORMATION
+
+  Mplus diagrams are currently not available for multilevel analysis.
+  No diagram output was produced.
+
+
+     Beginning Time:  14:32:58
+        Ending Time:  14:33:03
+       Elapsed Time:  00:00:05
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2022 Muthen & Muthen
+</pre>
+</body>
+</html>
