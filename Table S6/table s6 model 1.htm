@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<style>
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+a:link
+{
+    color: black;
+    text-decoration: none;
+}
+a[name]:hover
+{
+    text-decoration: none;
+}
+a:hover
+{
+    color: blue;
+    text-decoration: underline;
+}
+a:visited
+{
+    color: black;
+    text-decoration: none;
+}
+.heading
+{
+    color: black;
+    font-weight: bold;
+    font-size: 110%;
+}
+.heading:hover
+{
+    color: black;
+    font-weight: bold;
+    font-size: 110%;
+    text-decoration: none;
+}
+</style>
+
+<body style="font-family:'Courier New'; font-size:14px;">
+<p class="heading">
+Mplus VERSION 8.8<br />
+MUTHEN & MUTHEN<br />
+06/08/2022   2:47 PM<br />
+</p>
+
+<p class='heading'>OUTPUT SECTIONS</p>
+
+<ul>
+     <li><a href='#input'>Input Instructions</a></li>
+     <li><a href='#inputmessages'>Input Warnings And Errors</a></li>
+     <li><a href='#summary_analysis'>Summary Of Analysis</a></li>
+     <li><a href='#summary_data'>Summary Of Data</a></li>
+     <li><a href='#samplestats'>Sample Statistics</a></li>
+     <li><a href='#univariatess'>Univariate Sample Statistics</a></li>
+     <li><a href='#modelmessages'>Model Warnings And Errors</a></li>
+     <li><a href='#model_fit'>Model Fit Information</a></li>
+     <li><a href='#model_results'>Model Results</a></li>
+     <li><a href='#ci_results'>Confidence Intervals Of Model Results</a></li>
+</ul>
+<pre>
+
+<a name='input' class='heading'>INPUT INSTRUCTIONS</a>
+
+  Title:
+  Table S6 Model 1;
+  Data:
+    File is HBSC_mplus_07062022.dat ;
+    listwise = ON;
+  Variable:
+    Names are
+       seqno_int age physact60 countries_small countries_small_noSK GNI_std
+       UNIDIFF UNIDIFF_ct UNIDIFF_ct_rev GINI weekly_smoking gender softsweets_sum
+       fruitveg_sum breakfast_days VPA FAS_ridit;
+    Missing are all (-9999) ;
+
+  Usevariables are countries_small_noSK breakfast_days gender age FAS_ridit;
+
+  USEOBSERVATIONS ARE (FAS_ridit NE -9999) AND (age NE -9999) AND (gender NE -9999);
+
+  CLUSTER is countries_small_noSK;
+
+  WITHIN ARE gender age FAS_ridit;
+
+  DEFINE:
+  center gender age FAS_ridit (groupmean);
+
+  ANALYSIS:
+    TYPE IS TWOLEVEL;
+    ESTIMATOR IS MLR;
+    PROCESS = 3;
+
+  MODEL:
+  %within%
+  breakfast_days ON gender age FAS_ridit;
+
+
+  %between%
+  breakfast_days;
+
+
+
+  OUTPUT: sampstat cinterval;
+
+
+<a name='inputmessages' class='heading'></a>
+
+*** WARNING in VARIABLE command
+  Note that only the first 8 characters of variable names are used in the output.
+  Shorten variable names to avoid any confusion.
+   1 WARNING(S) FOUND IN THE INPUT INSTRUCTIONS
+
+
+
+
+Table S6 Model 1;
+
+<a name='summary_analysis' class='heading'>SUMMARY OF ANALYSIS</a>
+
+Number of groups                                                 1
+Number of observations                                      163658
+
+Number of dependent variables                                    1
+Number of independent variables                                  3
+Number of continuous latent variables                            0
+
+Observed dependent variables
+
+  Continuous
+   BREAKFAST_
+
+Observed independent variables
+   GENDER      AGE         FAS_RIDI
+
+Variables with special functions
+
+  Cluster variable      COUNTRIE
+
+  Within variables
+   GENDER      AGE         FAS_RIDI
+
+  Centering (GROUPMEAN)
+   GENDER      AGE         FAS_RIDI
+
+
+Estimator                                                      MLR
+Information matrix                                        OBSERVED
+Maximum number of iterations                                   100
+Convergence criterion                                    0.100D-05
+Maximum number of EM iterations                                500
+Convergence criteria for the EM algorithm
+  Loglikelihood change                                   0.100D-02
+  Relative loglikelihood change                          0.100D-05
+  Derivative                                             0.100D-03
+Minimum variance                                         0.100D-03
+Maximum number of steepest descent iterations                   20
+Maximum number of iterations for H1                           2000
+Convergence criterion for H1                             0.100D-03
+Optimization algorithm                                         EMA
+
+Input data file(s)
+  HBSC_mplus_07062022.dat
+Input data format  FREE
+
+
+<a name='summary_data' class='heading'>SUMMARY OF DATA</a>
+
+     Number of clusters                         31
+
+     Average cluster size     5279.290
+
+     Estimated Intraclass Correlations for the Y Variables
+
+                Intraclass
+     Variable  Correlation
+
+     BREAKFAS     0.040
+
+
+
+<a name='samplestats' class='heading'>SAMPLE STATISTICS</a>
+
+NOTE:  The sample statistics for within and between refer to the
+       maximum-likelihood estimated within and between covariance
+       matrices, respectively.
+
+
+     ESTIMATED SAMPLE STATISTICS FOR WITHIN
+
+
+           Means
+              BREAKFAS      GENDER        AGE           FAS_RIDI
+              ________      ________      ________      ________
+                0.000         0.000         0.000         0.000
+
+
+           Covariances
+              BREAKFAS      GENDER        AGE           FAS_RIDI
+              ________      ________      ________      ________
+ BREAKFAS       4.961
+ GENDER         0.077         0.250
+ AGE           -0.544        -0.002         2.625
+ FAS_RIDI       0.059         0.000        -0.001         0.082
+
+
+           Correlations
+              BREAKFAS      GENDER        AGE           FAS_RIDI
+              ________      ________      ________      ________
+ BREAKFAS       1.000
+ GENDER         0.069         1.000
+ AGE           -0.151        -0.002         1.000
+ FAS_RIDI       0.094         0.000        -0.002         1.000
+
+
+     ESTIMATED SAMPLE STATISTICS FOR BETWEEN
+
+
+           Means
+              BREAKFAS      GENDER        AGE           FAS_RIDI
+              ________      ________      ________      ________
+                5.278         0.000         0.000         0.000
+
+
+           Covariances
+              BREAKFAS      GENDER        AGE           FAS_RIDI
+              ________      ________      ________      ________
+ BREAKFAS       0.209
+ GENDER         0.000         0.000
+ AGE            0.000         0.000         0.000
+ FAS_RIDI       0.000         0.000         0.000         0.000
+
+
+           Correlations
+              BREAKFAS      GENDER        AGE           FAS_RIDI
+              ________      ________      ________      ________
+ BREAKFAS       1.000
+ GENDER         0.000         0.000
+ AGE            0.000         0.000         0.000
+ FAS_RIDI       0.000         0.000         0.000         0.000
+
+
+<a name='univariatess' class='heading'>UNIVARIATE SAMPLE STATISTICS</a>
+
+
+     UNIVARIATE HIGHER-ORDER MOMENT DESCRIPTIVE STATISTICS
+
+         Variable/         Mean/     Skewness/   Minimum/ % with                Percentiles
+        Sample Size      Variance    Kurtosis    Maximum  Min/Max      20%/60%    40%/80%    Median
+
+     BREAKFAST_DAYS        5.260      -0.969       0.000    3.93%       3.000      6.000      7.000
+          163658.000       5.128      -0.527       7.000   52.12%       7.000      7.000
+     GENDER                0.000       0.048      -0.505    1.68%      -0.496     -0.483     -0.439
+          163658.000       0.250      -1.995       0.568    0.38%       0.503      0.511
+     AGE                   0.000       0.023      -3.707    0.00%      -1.819     -0.316      0.000
+          163658.000       2.625      -1.325       3.371    0.00%       0.309      1.851
+     FAS_RIDIT             0.000      -0.009      -0.523    0.00%      -0.299     -0.095     -0.007
+          163658.000       0.082      -1.188       0.499    0.00%       0.101      0.287
+
+<a name='modelmessages' class='heading'></a>
+
+THE MODEL ESTIMATION TERMINATED NORMALLY
+
+
+
+<a name='model_fit' class='heading'>MODEL FIT INFORMATION</a>
+
+Number of Free Parameters                        6
+
+Loglikelihood
+
+          H0 Value                     -360346.053
+          H0 Scaling Correction Factor     30.6263
+            for MLR
+          H1 Value                     -360346.053
+          H1 Scaling Correction Factor     30.6263
+            for MLR
+
+Information Criteria
+
+          Akaike (AIC)                  720704.106
+          Bayesian (BIC)                720764.139
+          Sample-Size Adjusted BIC      720745.071
+            (n* = (n + 2) / 24)
+
+Chi-Square Test of Model Fit
+
+          Value                              0.000*
+          Degrees of Freedom                     0
+          P-Value                           0.0000
+          Scaling Correction Factor         1.0000
+            for MLR
+
+*   The chi-square value for MLM, MLMV, MLR, ULSMV, WLSM and WLSMV cannot be used
+    for chi-square difference testing in the regular way.  MLM, MLR and WLSM
+    chi-square difference testing is described on the Mplus website.  MLMV, WLSMV,
+    and ULSMV difference testing is done using the DIFFTEST option.
+
+RMSEA (Root Mean Square Error Of Approximation)
+
+          Estimate                           0.000
+
+CFI/TLI
+
+          CFI                                1.000
+          TLI                                1.000
+
+Chi-Square Test of Model Fit for the Baseline Model
+
+          Value                            276.207
+          Degrees of Freedom                     3
+          P-Value                           0.0000
+
+SRMR (Standardized Root Mean Square Residual)
+
+          Value for Within                   0.000
+          Value for Between                  0.000
+
+
+
+<a name='model_results' class='heading'>MODEL RESULTS</a>
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+Within Level
+
+ BREAKFAST_ ON
+    GENDER             0.307      0.054      5.712      0.000
+    AGE               -0.207      0.022     -9.531      0.000
+    FAS_RIDIT          0.728      0.091      7.971      0.000
+
+ Residual Variances
+    BREAKFAST_         4.782      0.160     29.857      0.000
+
+Between Level
+
+ Means
+    BREAKFAST_         5.278      0.082     64.064      0.000
+
+ Variances
+    BREAKFAST_         0.209      0.042      4.993      0.000
+
+
+QUALITY OF NUMERICAL RESULTS
+
+     Condition Number for the Information Matrix              0.195E-04
+       (ratio of smallest to largest eigenvalue)
+
+
+<a name='ci_results' class='heading'>CONFIDENCE INTERVALS OF MODEL RESULTS</a>
+
+                  Lower .5%  Lower 2.5%    Lower 5%    Estimate    Upper 5%  Upper 2.5%   Upper .5%
+
+Within Level
+
+ BREAKFAS ON
+    GENDER           0.169       0.202       0.219       0.307       0.396       0.412       0.446
+    AGE             -0.262      -0.249      -0.242      -0.207      -0.171      -0.164      -0.151
+    FAS_RIDIT        0.493       0.549       0.578       0.728       0.878       0.907       0.963
+
+ Residual Variances
+    BREAKFAST_       4.369       4.468       4.518       4.782       5.045       5.095       5.194
+
+Between Level
+
+ Means
+    BREAKFAST_       5.066       5.116       5.142       5.278       5.413       5.439       5.490
+
+ Variances
+    BREAKFAST_       0.101       0.127       0.140       0.209       0.278       0.292       0.317
+
+
+DIAGRAM INFORMATION
+
+  Mplus diagrams are currently not available for multilevel analysis.
+  No diagram output was produced.
+
+
+     Beginning Time:  14:47:02
+        Ending Time:  14:47:07
+       Elapsed Time:  00:00:05
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2022 Muthen & Muthen
+</pre>
+</body>
+</html>
